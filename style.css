@@ -35,10 +35,10 @@ body {
 main {
     max-width: 800px;
     margin: 40px auto;
-    background-color: #ffffff;
+    /* REMOVED: background-color: #ffffff; */ /* No white background */
+    /* REMOVED: box-shadow: 0 4px 20px rgba(0,0,0,0.1); */ /* No box shadow */
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 section {
@@ -101,8 +101,8 @@ h2 {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #333;
-    color: #fff;
+    /* REMOVED: background-color: #333; */ /* No black background */
+    color: #fff; /* Changed color to white for visibility on blue background */
     margin-top: 40px;
     border-radius: 12px;
 }
