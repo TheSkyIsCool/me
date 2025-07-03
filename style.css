@@ -3,7 +3,8 @@ body {
     font-family: 'Inter', sans-serif; /* Global font */
     margin: 0;
     padding: 0;
-    background-color: #87CEEB; /* A standard sky blue color for the overall page */
+    /* Body background color is now just a fallback if sections don't cover it */
+    background-color: #87CEEB;
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth; /* For smooth scrolling *between* snaps */
@@ -19,12 +20,13 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #87CEEB; /* Explicitly set for this section too */
+    background-color: #87CEEB; /* Sky blue for the intro */
     color: white;
     padding: 20px;
     box-sizing: border-box;
     position: relative; /* For positioning scroll prompt */
     scroll-snap-align: start; /* Snap to the start of this section */
+    scroll-snap-stop: always; /* Force stop here */
 }
 
 .intro-text {
@@ -40,7 +42,6 @@ body {
     bottom: 50px; /* Position above the bottom */
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.1em;
-    /* The bounce animation is now applied directly to the arrow for subtlety */
 }
 
 .scroll-arrow {
@@ -71,138 +72,152 @@ body {
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    background-color: transparent; /* Section background transparent, letting body color show */
     scroll-snap-align: start; /* Snap to the start of each content section */
+    scroll-snap-stop: always; /* THIS IS KEY: Force stop at each section */
+    transition: background-color 0.5s ease; /* Smooth transition for background color changes */
 }
 
-.content-card {
-    background-color: rgba(255, 255, 255, 0.9); /* Default slightly transparent white card (for About Me) */
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+.section-content {
+    /* This replaces the old .content-card for centering and max-width */
     max-width: 600px;
     width: 100%;
     text-align: center;
-    color: #333; /* Default dark text */
-    transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease, box-shadow 0.5s ease; /* Smooth transition for theme changes */
+    padding: 20px; /* Add some padding so text isn't right at the edge */
+    box-sizing: border-box;
+    /* We don't need a background color here anymore, it's on the section */
 }
 
-.content-card h2 {
-    color: #007bff; /* Default blue for headings */
-    border-bottom: 2px solid #e0e0e0;
+.content-section h2 {
+    color: inherit; /* Inherit color from the section to match theme */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Lighter border for contrast */
     padding-bottom: 15px;
     margin-bottom: 25px;
     font-weight: 700;
 }
 
-.content-card p {
+.content-section p {
     margin-bottom: 15px;
     font-size: 1.1em;
+    color: inherit; /* Inherit color from the section to match theme */
 }
 
 .section-icon {
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
-    filter: drop-shadow(0 0 12px rgba(0, 123, 255, 0.7)); /* Default blue glow */
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5)); /* Default white glow for icons */
 }
 
 .social-link {
     display: inline-block;
-    background-color: #007bff; /* Default blue button */
-    color: white;
+    background-color: white; /* Default white button */
+    color: #333; /* Dark text on white */
     padding: 12px 25px;
     border-radius: 8px;
     text-decoration: none;
     margin-top: 20px;
     font-weight: 700;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
 }
 
 .social-link:hover {
-    background-color: #0056b3; /* Default darker blue on hover */
+    background-color: #f0f0f0; /* Slightly darker white on hover */
     transform: translateY(-3px);
 }
 
-.continue-reading-prompt {
+.section-nav-prompt {
     margin-top: 30px;
     font-size: 0.9em;
-    color: #666;
-    /* The pulse animation is good for the arrow here */
+    color: rgba(255, 255, 255, 0.8); /* White prompt for contrast */
 }
+
 
 /* -------------------- SPECIFIC SECTION THEMES -------------------- */
 
-/* Roblox Section Theme */
-#roblox-info .content-card {
-    background-color: #8120D1; /* Roblox-like purple background */
-    color: white; /* White text for contrast */
-    border: 2px solid #5C0099; /* Darker purple border */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(129, 32, 209, 0.6); /* Purple glow shadow */
-    font-family: 'Roboto', sans-serif; /* Apply to card */
+/* About Me Section Theme (Default light theme) */
+#about-me {
+    background-color: #87CEEB; /* Sky blue, similar to intro */
+    color: white;
 }
 
-#roblox-info .content-card h2,
-#roblox-info .content-card p { /* Apply font to heading and paragraphs */
+#about-me .section-icon {
+    /* No specific filter here, use general section-icon filter */
+}
+
+#about-me .social-link {
+    background-color: white;
+    color: #007bff; /* Blue text on white button for consistency */
+}
+
+#about-me .social-link:hover {
+    background-color: #e6f7ff; /* Lighter blue background on hover */
+}
+
+
+/* Roblox Section Theme */
+#roblox-info {
+    background-color: #8120D1; /* Roblox-like purple background */
+    color: white; /* White text for contrast */
+}
+
+#roblox-info .section-content h2,
+#roblox-info .section-content p {
     font-family: 'Roboto', sans-serif;
 }
 
-#roblox-info .content-card h2 {
+#roblox-info .section-content h2 {
     color: #FFD700; /* Gold/yellow for headings */
     border-bottom-color: rgba(255, 255, 255, 0.3); /* Lighter border for contrast */
 }
 
-#roblox-info .content-card p {
+#roblox-info .section-content p {
     color: #eee; /* Lighter text for paragraphs */
 }
 
-#roblox-info .content-card .section-icon {
+#roblox-info .section-icon {
     filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8)); /* Gold glow for icons */
 }
 
-#roblox-info .content-card .social-link {
+#roblox-info .social-link {
     background-color: #FFD700; /* Gold button */
     color: #333; /* Dark text on gold */
 }
 
-#roblox-info .content-card .social-link:hover {
+#roblox-info .social-link:hover {
     background-color: #E6C200; /* Darker gold on hover */
     color: #000;
 }
 
 /* Discord Section Theme */
-#discord-info .content-card {
+#discord-info {
     background-color: #2c2f33; /* Discord dark theme background (charcoal) */
     color: #dcddde; /* Light grey text */
-    border: 2px solid #7289da; /* Discord blue border */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(114, 137, 218, 0.6); /* Discord blue glow shadow */
-    font-family: 'Inter', sans-serif; /* Apply to card */
 }
 
-#discord-info .content-card h2,
-#discord-info .content-card p { /* Apply font to heading and paragraphs */
+#discord-info .section-content h2,
+#discord-info .section-content p {
     font-family: 'Inter', sans-serif;
 }
 
-#discord-info .content-card h2 {
+#discord-info .section-content h2 {
     color: #7289da; /* Discord blue for headings */
     border-bottom-color: rgba(114, 137, 218, 0.3); /* Lighter border for contrast */
 }
 
-#discord-info .content-card p {
+#discord-info .section-content p {
     color: #b9bbbe; /* Slightly darker light grey for paragraphs */
 }
 
-#discord-info .content-card .section-icon {
+#discord-info .section-icon {
     filter: drop-shadow(0 0 12px rgba(114, 137, 218, 0.8)); /* Discord blue glow for icons */
 }
 
-#discord-info .content-card .social-link {
+#discord-info .social-link {
     background-color: #7289da; /* Discord blue button */
     color: white;
 }
 
-#discord-info .content-card .social-link:hover {
+#discord-info .social-link:hover {
     background-color: #677eb4; /* Darker Discord blue on hover */
 }
 
@@ -211,9 +226,11 @@ body {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: transparent; /* This makes the footer background the same as the body */
-    color: #eee; /* Changed text color to light grey for readability on blue */
-    margin-top: 40px;
-    border-radius: 12px;
+    background-color: #1a1a1a; /* Dark background for footer */
+    color: #eee;
     scroll-snap-align: start; /* Make footer snap as well */
+    min-height: 20vh; /* Give the footer some height for snapping */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
