@@ -5,37 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sky</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
     <div class="intro-section">
-        <h1 class="intro-text">sky.</h1>
+        <h1 class="intro-text" data-aos="fade-down" data-aos-duration="1000">sky.</h1>
     </div>
 
     <main>
-        <section id="about">
+        <section id="about" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
             <h2>I'm Sky!</h2>
-            <div class="social-links">
+            <div class="social-links" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                 <a href="https://discord.com/users/852844724456652829" target="_blank" rel="noopener noreferrer" class="glow-effect">
-                    <img src="https://discord.com/assets/f4c807b0e45e5d381c19b8445dd4a07d.svg" alt="Discord Icon" class="social-icon">
+                    <img src="images/discord_icon.png" alt="Discord Icon" class="social-icon">
                     <span>theskyiscool</span>
                 </a>
                 <a href="https://www.roblox.com/users/1869928573/profile" target="_blank" rel="noopener noreferrer" class="glow-effect">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Roblox_logo.svg/1200px-Roblox_logo.svg.png" alt="Roblox Icon" class="social-icon">
+                    <img src="images/roblox_icon.png" alt="Roblox Icon" class="social-icon">
                     <span>s_nkalp</span>
                 </a>
             </div>
-            </section>
+        </section>
 
-        <section id="projects">
+        <section id="projects" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
             <h2>My Projects</h2>
             <p>Check out my <a href="https://calc.sky.me/" target="_blank" rel="noopener noreferrer" class="glow-effect">Calculator Project</a>!</p>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 sky. (me)</p>
+    <footer data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800">
+        <p>&copy; 2025 Sky. (me)</p>
     </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true // animations only happen once on scroll down
+        });
+    </script>
 
 </body>
 </html>
