@@ -6,7 +6,7 @@ body {
     background-color: #87CEEB; /* A standard sky blue color */
     color: #333;
     line-height: 1.6;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* For smooth scrolling if you add internal links */
 }
 
 /* Styling for the introductory "sky." section */
