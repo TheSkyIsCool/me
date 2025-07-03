@@ -16,16 +16,7 @@
     <main>
         <section id="about" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-delay="500">
             <h2>I'm Sky!</h2>
-            <div class="social-links" data-aos="zoom-in-up" data-aos-duration="1500" data-aos-delay="800">
-                <a href="https://discord.com/users/852844724456652829" target="_blank" rel="noopener noreferrer" class="glow-effect">
-                    <img src="images/discord_icon.png" alt="Discord Icon" class="social-icon">
-                    <span>theskyiscool</span>
-                </a>
-                <a href="https://www.roblox.com/users/1869928573/profile" target="_blank" rel="noopener noreferrer" class="glow-effect">
-                    <img src="images/roblox_icon.png" alt="Roblox Icon" class="social-icon">
-                    <span>s_nkalp</span>
-                </a>
-            </div>
+            <p>Welcome to my space. Click the icons in the dock below to learn more about me!</p>
         </section>
 
         </main>
@@ -34,12 +25,51 @@
         <p>&copy; 2025 Sky. (me)</p>
     </footer>
 
+    <div id="discord-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>My Discord Profile</h3>
+            <img src="images/discord_icon.png" alt="Discord Icon" class="modal-icon">
+            <p><strong>Username:</strong> theskyiscool</p>
+            <p><strong>User ID:</strong> 852844724456652829</p>
+            <p>I'm active on Discord for gaming and community chats!</p>
+            <a href="https://discord.com/users/852844724456652829" target="_blank" rel="noopener noreferrer" class="modal-link">Visit my Discord Profile</a>
+        </div>
+    </div>
+
+    <div id="roblox-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>My Roblox Account</h3>
+            <img src="images/roblox_icon.png" alt="Roblox Icon" class="modal-icon">
+            <p><strong>Username:</strong> s_nkalp</p>
+            <p><strong>User ID:</strong> 1869928573</p>
+            <p>You can find me playing various games on Roblox.</p>
+            <a href="https://www.roblox.com/users/1869928573/profile" target="_blank" rel="noopener noreferrer" class="modal-link">Visit my Roblox Profile</a>
+        </div>
+    </div>
+
+    <div class="dock-container">
+        <div class="dock">
+            <div class="dock-item" id="discord-icon">
+                <img src="images/discord_icon.png" alt="Discord">
+                <span class="dock-label">Discord</span>
+            </div>
+            <div class="dock-item" id="roblox-icon">
+                <img src="images/roblox_icon.png" alt="Roblox">
+                <span class="dock-label">Roblox</span>
+            </div>
+            </div>
+    </div>
+
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
             once: true // animations only happen once on scroll down
         });
     </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
