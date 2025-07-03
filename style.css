@@ -6,7 +6,9 @@ body {
     background-color: #87CEEB; /* A standard sky blue color */
     color: #333;
     line-height: 1.6;
-    scroll-behavior: smooth; /* For smooth scrolling */
+    scroll-behavior: smooth; /* For smooth scrolling *between* snaps */
+    scroll-snap-type: y mandatory; /* THIS IS KEY: Enable vertical scroll snapping, making it mandatory */
+    overflow-y: scroll; /* Ensure vertical scrolling is always available for snapping */
 }
 
 /* Styling for the introductory "sky." section */
@@ -22,6 +24,7 @@ body {
     padding: 20px;
     box-sizing: border-box;
     position: relative; /* For positioning scroll prompt */
+    scroll-snap-align: start; /* THIS IS KEY: Snap to the start of this section */
 }
 
 .intro-text {
@@ -68,6 +71,7 @@ body {
     padding: 40px 20px;
     box-sizing: border-box;
     background-color: transparent; /* Blend with body background */
+    scroll-snap-align: start; /* THIS IS KEY: Snap to the start of each content section */
 }
 
 .content-card {
@@ -158,4 +162,5 @@ footer {
     color: #eee; /* Changed text color to light grey for readability on blue */
     margin-top: 40px;
     border-radius: 12px;
+    scroll-snap-align: start; /* Make footer snap as well */
 }
