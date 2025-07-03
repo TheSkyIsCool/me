@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const robloxModal = document.getElementById('roblox-modal');
     const closeButtons = document.querySelectorAll('.close-button');
     const modalOverlays = document.querySelectorAll('.modal-overlay');
+    const dockContainer = document.querySelector('.dock-container'); // Get the dock container
 
     // Function to open a modal
     const openModal = (modalElement) => {
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = ''; // Re-enable scrolling
     };
 
-    // Event listeners for icons
+    // Event listeners for icons to open modals
     discordIcon.addEventListener('click', () => {
         openModal(discordModal);
     });
@@ -42,5 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal(overlay);
             }
         });
+    });
+
+    // Logic for dock visibility on scroll
+    window.addEventListener('scroll', () => {
+        const scrollThreshold = 150; // Pixels scrolled down before dock appears
+        if (window.scrollY > scrollThreshold) {
+            dockContainer.classList.add('active');
+        } else {
+            dockContainer.classList.remove('active');
+        }
     });
 });

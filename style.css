@@ -1,6 +1,6 @@
 /* Basic Reset & Body Styling */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif; /* Global font */
     margin: 0;
     padding: 0;
     background-color: #87CEEB; /* A standard sky blue color */
@@ -25,7 +25,7 @@ body {
 
 .intro-text {
     font-size: 15vw;
-    font-weight: bold;
+    font-weight: 700; /* Bold Inter font */
     margin: 0;
     letter-spacing: 0.05em;
     text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6); /* White glow */
@@ -54,7 +54,7 @@ h2 {
 /* -------------------- DOCK STYLES -------------------- */
 .dock-container {
     position: fixed;
-    bottom: 0;
+    bottom: -100px; /* Initially hidden below screen */
     left: 0;
     width: 100%;
     display: flex;
@@ -65,6 +65,13 @@ h2 {
     -webkit-backdrop-filter: blur(5px); /* Safari support */
     box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
     z-index: 1000; /* Ensure it's on top */
+    transition: bottom 0.5s ease-out, opacity 0.5s ease-out; /* Smooth transition */
+    opacity: 0; /* Initially invisible */
+}
+
+.dock-container.active {
+    bottom: 0; /* Slides up when active */
+    opacity: 1; /* Fades in when active */
 }
 
 .dock {
@@ -144,15 +151,17 @@ h2 {
     width: 90%;
     text-align: center;
     position: relative;
-    transform: translateY(20px); /* Slight slide up effect */
-    transition: transform 0.3s ease-out;
-    /* Default modal content styling, overridden by specific IDs */
-    background-color: #ffffff; /* Default white background */
-    color: #333; /* Default dark text */
+    /* "Pew Pew" Animation Start State */
+    transform: translateY(50px) scale(0.8); /* Start smaller and lower */
+    opacity: 0; /* Start invisible */
+    /* "Pew Pew" Animation Transition */
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease-out; /* Springy effect */
 }
 
 .modal-overlay.active .modal-content {
-    transform: translateY(0); /* Slide to original position */
+    /* "Pew Pew" Animation End State */
+    transform: translateY(0) scale(1); /* Pop to full size */
+    opacity: 1; /* Become visible */
 }
 
 .close-button {
@@ -178,6 +187,7 @@ h2 {
 
 .modal-content h3 {
     margin-bottom: 15px;
+    font-weight: 700; /* Bold heading */
 }
 
 .modal-content p {
@@ -191,6 +201,7 @@ h2 {
     text-decoration: none;
     margin-top: 20px;
     transition: background-color 0.2s;
+    font-weight: 700; /* Bold link text */
 }
 
 /* -------------------- SPECIFIC MODAL THEMES -------------------- */
@@ -199,7 +210,7 @@ h2 {
 #discord-modal .modal-content {
     background-color: #36393f; /* Discord dark theme background */
     color: #ffffff; /* White text */
-    font-family: 'gg sans', 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Discord-like font stack */
+    font-family: 'Inter', sans-serif; /* Using Inter for Discord-like feel */
 }
 
 #discord-modal .modal-content h3 {
@@ -220,7 +231,7 @@ h2 {
     background-color: #ffffff; /* Roblox light theme background */
     color: #333333; /* Dark text */
     border: 2px solid #007bff; /* Roblox blue border */
-    font-family: 'Source Sans Pro', Arial, sans-serif; /* Roblox-like font stack */
+    font-family: 'Roboto', sans-serif; /* Using Roboto for Roblox-like feel */
 }
 
 #roblox-modal .modal-content h3 {
