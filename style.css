@@ -3,11 +3,11 @@ body {
     font-family: 'Inter', sans-serif; /* Global font */
     margin: 0;
     padding: 0;
-    background-color: #87CEEB; /* A standard sky blue color */
+    background-color: #87CEEB; /* A standard sky blue color for the overall page */
     color: #333;
     line-height: 1.6;
     scroll-behavior: smooth; /* For smooth scrolling *between* snaps */
-    scroll-snap-type: y mandatory; /* THIS IS KEY: Enable vertical scroll snapping, making it mandatory */
+    scroll-snap-type: y mandatory; /* Enable vertical scroll snapping, making it mandatory */
     overflow-y: scroll; /* Ensure vertical scrolling is always available for snapping */
 }
 
@@ -19,12 +19,12 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #87CEEB;
+    background-color: #87CEEB; /* Explicitly set for this section too */
     color: white;
     padding: 20px;
     box-sizing: border-box;
     position: relative; /* For positioning scroll prompt */
-    scroll-snap-align: start; /* THIS IS KEY: Snap to the start of this section */
+    scroll-snap-align: start; /* Snap to the start of this section */
 }
 
 .intro-text {
@@ -62,7 +62,7 @@ body {
     }
 }
 
-/* -------------------- CONTENT SECTIONS -------------------- */
+/* -------------------- CONTENT SECTIONS (General) -------------------- */
 .content-section {
     min-height: 100vh; /* Each section takes full viewport height */
     display: flex;
@@ -70,23 +70,24 @@ body {
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    background-color: transparent; /* Blend with body background */
-    scroll-snap-align: start; /* THIS IS KEY: Snap to the start of each content section */
+    background-color: transparent; /* Section background transparent, letting body color show */
+    scroll-snap-align: start; /* Snap to the start of each content section */
 }
 
 .content-card {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white card */
+    background-color: rgba(255, 255, 255, 0.9); /* Default slightly transparent white card (for About Me) */
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     max-width: 600px;
     width: 100%;
     text-align: center;
-    color: #333;
+    color: #333; /* Default dark text */
+    transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease, box-shadow 0.5s ease; /* Smooth transition for theme changes */
 }
 
 .content-card h2 {
-    color: #007bff;
+    color: #007bff; /* Default blue for headings */
     border-bottom: 2px solid #e0e0e0;
     padding-bottom: 15px;
     margin-bottom: 25px;
@@ -102,12 +103,12 @@ body {
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
-    filter: drop-shadow(0 0 12px rgba(0, 123, 255, 0.7)); /* Blue glow */
+    filter: drop-shadow(0 0 12px rgba(0, 123, 255, 0.7)); /* Default blue glow */
 }
 
 .social-link {
     display: inline-block;
-    background-color: #007bff;
+    background-color: #007bff; /* Default blue button */
     color: white;
     padding: 12px 25px;
     border-radius: 8px;
@@ -118,7 +119,7 @@ body {
 }
 
 .social-link:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Default darker blue on hover */
     transform: translateY(-3px);
 }
 
@@ -144,15 +145,71 @@ body {
     }
 }
 
-/* Specific font for Roblox content if desired */
+/* -------------------- SPECIFIC SECTION THEMES -------------------- */
+
+/* Roblox Section Theme */
 #roblox-info .content-card {
-    font-family: 'Roboto', sans-serif;
+    background-color: #8120D1; /* Roblox-like purple background */
+    color: white; /* White text for contrast */
+    border: 2px solid #5C0099; /* Darker purple border */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(129, 32, 209, 0.6); /* Purple glow shadow */
+    font-family: 'Roboto', sans-serif; /* Keep Roblox font */
 }
 
-/* Specific font for Discord content if desired */
-#discord-info .content-card {
-    font-family: 'Inter', sans-serif;
+#roblox-info .content-card h2 {
+    color: #FFD700; /* Gold/yellow for headings */
+    border-bottom-color: rgba(255, 255, 255, 0.3); /* Lighter border for contrast */
 }
+
+#roblox-info .content-card p {
+    color: #eee; /* Lighter text for paragraphs */
+}
+
+#roblox-info .content-card .section-icon {
+    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8)); /* Gold glow for icons */
+}
+
+#roblox-info .content-card .social-link {
+    background-color: #FFD700; /* Gold button */
+    color: #333; /* Dark text on gold */
+}
+
+#roblox-info .content-card .social-link:hover {
+    background-color: #E6C200; /* Darker gold on hover */
+    color: #000;
+}
+
+/* Discord Section Theme */
+#discord-info .content-card {
+    background-color: #2c2f33; /* Discord dark theme background (charcoal) */
+    color: #dcddde; /* Light grey text */
+    border: 2px solid #7289da; /* Discord blue border */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(114, 137, 218, 0.6); /* Discord blue glow shadow */
+    font-family: 'Inter', sans-serif; /* Keep Discord font */
+}
+
+#discord-info .content-card h2 {
+    color: #7289da; /* Discord blue for headings */
+    border-bottom-color: rgba(114, 137, 218, 0.3); /* Lighter border for contrast */
+}
+
+#discord-info .content-card p {
+    color: #b9bbbe; /* Slightly darker light grey for paragraphs */
+}
+
+#discord-info .content-card .section-icon {
+    filter: drop-shadow(0 0 12px rgba(114, 137, 218, 0.8)); /* Discord blue glow for icons */
+}
+
+#discord-info .content-card .social-link {
+    background-color: #7289da; /* Discord blue button */
+    color: white;
+}
+
+#discord-info .content-card .social-link:hover {
+    background-color: #677eb4; /* Darker Discord blue on hover */
+}
+
 
 /* -------------------- FOOTER STYLES -------------------- */
 footer {
