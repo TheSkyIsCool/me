@@ -1,0 +1,108 @@
+/* Basic Reset & Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #87CEEB; /* A standard sky blue color */
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* Styling for the introductory "sky." section */
+.intro-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #87CEEB;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.intro-text {
+    font-size: 15vw;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6); /* White glow */
+}
+
+/* Styling for the main content section (your details) */
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #007bff;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center; /* Center the "I'm Sky!" heading */
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column; /* Stack icons vertically */
+    align-items: center; /* Center icons horizontally */
+    gap: 20px; /* Space between icons */
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.social-links a:hover {
+    text-decoration: none; /* Remove underline on hover */
+    color: #003d82;
+    transform: translateY(-3px); /* Slight lift effect */
+}
+
+.social-icon {
+    width: 35px; /* Size of the icon */
+    height: 35px;
+    margin-right: 10px; /* Space between icon and text */
+    filter: drop-shadow(0 0 5px rgba(0, 123, 255, 0.5)); /* Subtle blue glow for icons */
+}
+
+/* Glow effect for links and text */
+.glow-effect {
+    position: relative;
+    text-shadow: 0 0 8px rgba(0, 123, 255, 0.6), 0 0 12px rgba(0, 123, 255, 0.4); /* Blue text glow */
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+.glow-effect:hover {
+    text-shadow: 0 0 15px rgba(0, 123, 255, 0.8), 0 0 20px rgba(0, 123, 255, 0.6); /* More intense glow on hover */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    margin-top: 40px;
+    border-radius: 12px;
+}
