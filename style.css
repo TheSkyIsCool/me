@@ -35,8 +35,7 @@ body {
 main {
     max-width: 800px;
     margin: 40px auto;
-    /* REMOVED: background-color: #ffffff; */ /* No white background */
-    /* REMOVED: box-shadow: 0 4px 20px rgba(0,0,0,0.1); */ /* No box shadow */
+    /* Removed: background-color and box-shadow for a transparent look */
     padding: 30px;
     border-radius: 12px;
 }
@@ -101,8 +100,8 @@ h2 {
 footer {
     text-align: center;
     padding: 20px;
-    /* REMOVED: background-color: #333; */ /* No black background */
-    color: #fff; /* Changed color to white for visibility on blue background */
+    background-color: transparent; /* This makes the footer background the same as the body */
+    color: #eee; /* Changed text color to light grey for readability on blue */
     margin-top: 40px;
     border-radius: 12px;
 }
