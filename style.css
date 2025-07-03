@@ -153,7 +153,12 @@ body {
     color: white; /* White text for contrast */
     border: 2px solid #5C0099; /* Darker purple border */
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(129, 32, 209, 0.6); /* Purple glow shadow */
-    font-family: 'Roboto', sans-serif; /* Keep Roblox font */
+    font-family: 'Roboto', sans-serif; /* Apply to card */
+}
+
+#roblox-info .content-card h2,
+#roblox-info .content-card p { /* Apply font to heading and paragraphs */
+    font-family: 'Roboto', sans-serif;
 }
 
 #roblox-info .content-card h2 {
@@ -185,7 +190,12 @@ body {
     color: #dcddde; /* Light grey text */
     border: 2px solid #7289da; /* Discord blue border */
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(114, 137, 218, 0.6); /* Discord blue glow shadow */
-    font-family: 'Inter', sans-serif; /* Keep Discord font */
+    font-family: 'Inter', sans-serif; /* Apply to card */
+}
+
+#discord-info .content-card h2,
+#discord-info .content-card p { /* Apply font to heading and paragraphs */
+    font-family: 'Inter', sans-serif;
 }
 
 #discord-info .content-card h2 {
