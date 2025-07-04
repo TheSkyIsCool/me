@@ -11,15 +11,17 @@
 
     <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg"> 
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 <body>
 
     <div class="hero-screen" id="heroScreen">
-        <div class="profile-content">
+        <div class="profile-content" data-aos="fade"> 
             <h1 class="name">sky.</h1>
         </div>
 
-        <div class="social-links-container">
+        <div class="social-links-container" data-aos="fade-up" data-aos-delay="300"> 
             <a href="https://discord.com/users/852844724456652829" target="_blank" rel="noopener noreferrer" class="social-link">
                 <img src="images/discord_icon.png" alt="Discord" class="social-icon">
             </a>
@@ -28,19 +30,27 @@
             </a>
         </div>
 
-        <a href="#" id="aboutMeButton" class="about-me-button">about meeee →</a>
+        <a href="#" id="aboutMeButton" class="about-me-button" data-aos="fade-up" data-aos-delay="600">about meeee →</a>
     </div>
 
     <section id="about-me-section" class="content-section">
-        <h2>Heyo I'm Sky!</h2>
-        <p>I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
+        <h2 data-aos="fade-right">Heyo I'm Sky!</h2>
+        <p data-aos="fade-left">I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
 
-        <div class="spts-calc-link">
+        <div class="spts-calc-link" data-aos="zoom-in" data-aos-delay="200">
             <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
         </div>
     </section>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Initialize AOS animations with properties for smoother, non-disruptive effects
+        AOS.init({
+            duration: 1000, // Animation duration in milliseconds
+            once: true,    // Whether animation should happen only once scrolling down
+            offset: 50,    // Pixels from the bottom of the window to trigger the animation
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             const aboutMeButton = document.getElementById('aboutMeButton');
             const aboutMeSection = document.getElementById('about-me-section');
@@ -57,16 +67,6 @@
                 // Scroll to the about me section smoothly
                 aboutMeSection.scrollIntoView({ behavior: 'smooth' });
             });
-
-            // Optional: Re-disable scrolling if user scrolls back to hero-screen
-            // This is a bit tricky to implement perfectly for all scroll events,
-            // but for simplicity, we can do it on scroll end or when hero is in view
-            // body.addEventListener('scroll', function() {
-            //      const heroScreenBottom = heroScreen.getBoundingClientRect().bottom;
-            //      if (heroScreenBottom > window.innerHeight - 50) { // Give a small buffer
-            //          body.style.overflowY = 'hidden';
-            //      }
-            // });
         });
     </script>
 
