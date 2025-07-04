@@ -42,6 +42,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Force scroll to top immediately on DOMContentLoaded
+            window.scrollTo(0, 0); // <--- THIS IS THE MODIFIED LINE ADDED HERE
+
             const aboutMeButton = document.getElementById('aboutMeButton');
             const aboutMeSection = document.getElementById('about-me-section');
             const heroScreen = document.getElementById('heroScreen');
