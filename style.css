@@ -65,7 +65,7 @@ body {
 }
 
 .name {
-    font-family: 'Roboto', sans-serif; /* You can change this to a different font if you prefer (e.g., 'Pacifico', 'Dancing Script' if imported) */
+    font-family: 'Roboto', sans-serif;
     font-size: 8vw; /* Responsive font size */
     font-weight: 700;
     margin: 0;
@@ -102,18 +102,15 @@ body {
 .social-icon {
     width: 30px !important; /* Fixed icon size */
     height: 30px !important; /* Fixed icon size */
-    /* *** ICON COLOR FIX *** */
-    /* This filter aims to get purple. If your original images are indeed purple,
-       you might only need the drop-shadow filter.
-       If they are blue/green/other, this filter will try to shift them to purple. */
-    filter: hue-rotate(-60deg) saturate(200%) brightness(120%) drop-shadow(0 0 8px rgba(138, 43, 226, 0.9)); /* Attempt to shift to purple and add glow */
-    /* Explanation for filter:
-       - hue-rotate(-60deg): Often shifts green towards purple/magenta, or blue towards more intense purples.
-       - saturate(200%): Increases color intensity.
-       - brightness(120%): Makes them a bit brighter.
-       - drop-shadow: Adds the glowing effect with a purple color.
-       You might need to tweak the `hue-rotate` value (`0deg` to `360deg` or `-360deg`)
-       to find the perfect purple based on your specific source image colors. */
+    /* *** ICON COLOR FIX - Adjusted for darker, more purplish *** */
+    /* This filter aims to shift current light blue to a darker purple.
+       - hue-rotate(240deg): Shifts blue hues significantly towards purple.
+       - saturate(300%): Makes the color much more intense.
+       - brightness(80%): Makes the color darker.
+       - drop-shadow: Adds the glowing effect with a deep purple color.
+       You might still need to slightly adjust 'hue-rotate' value (e.g., 230deg, 250deg)
+       if it's not the perfect shade based on your original icon image's exact blue. */
+    filter: hue-rotate(240deg) saturate(300%) brightness(80%) drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
 /* About Me Button bottom right */
@@ -151,16 +148,6 @@ body {
         rgba(0, 0, 0, 0.7) 50%, /* More opaque black in the middle */
         rgba(0, 0, 0, 0.4) 100% /* Slightly transparent black */
     );
-    /* This gradient lets the original background image show through subtly.
-       You can adjust the alpha (last number) in rgba() from 0 to 1 for more/less transparency.
-       For a gradient that blends sky colors more directly, try:
-       background: linear-gradient(
-           to bottom,
-           rgba(255, 105, 180, 0.2) 0%, /* Pink from sky */
-           rgba(100, 149, 237, 0.5) 50%, /* Blue from sky */
-           rgba(138, 43, 226, 0.2) 100% /* Purple hint */
-       ); */
-
     color: rgba(255, 255, 255, 0.9); /* White-ish text color */
     text-align: center;
 }
@@ -243,7 +230,7 @@ body {
         flex-direction: row; /* Horizontal layout */
         justify-content: center;
         width: 100%;
-        margin-top: 20px; /* Space from name */
+        margin-top: 20px;
         bottom: auto; /* Reset bottom */
         left: auto; /* Reset left */
     }
