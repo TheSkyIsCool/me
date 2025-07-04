@@ -1,130 +1,222 @@
-/* General Body Styles */
+/* Basic Reset & Body Styling */
 body {
     margin: 0;
     padding: 0;
-    height: 100vh; /* Make body take up the full viewport height */
-    width: 100vw;  /* Make body take up the full viewport width */
-    overflow: hidden; /* CRITICAL: Remove all scrolling */
-    font-family: 'Inter', sans-serif; /* Default font */
-    color: white; /* Default text color for the page */
-
-    /* Background image (thesky.jpg) */
+    font-family: 'Inter', sans-serif;
+    color: white; /* Default text color for the hero section */
+    line-height: 1.6;
+    /* Sky background on the body so it appears throughout the page */
     background-image: url('images/thesky.jpg');
-    background-size: cover; /* Ensure the image covers the entire viewport */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-
-    position: relative; /* Allows for absolute positioning of children elements */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Keep background fixed during scroll */
+    background-repeat: no-repeat;
+    /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
+    position: relative; /* For absolutely positioned elements within the body */
+    scroll-behavior: smooth; /* Smooth scrolling when clicking links */
 }
 
-/* Styles for the Name and Tagline, positioned precisely */
+/* Hero Section (The initial full-screen view) */
+.hero-screen {
+    height: 100vh; /* Takes full viewport height */
+    width: 100vw; /* Takes full viewport width */
+    position: relative; /* For absolute positioning of children */
+    /* display: flex; /* Not strictly needed as children are absolute, but can help for debugging */
+    /* justify-content: center; */
+    /* align-items: center; */
+    box-sizing: border-box;
+}
+
+/* Profile text (Name only) - Centered */
 .profile-content {
     position: absolute; /* Position explicitly on the page */
-    top: 50%; /* Start vertical positioning from the middle */
-    left: 10%; /* Distance from the left edge */
-    transform: translateY(-50%); /* Adjust upwards by half its height for true vertical centering */
-    text-align: left; /* Align text within its container to the left */
-    max-width: 40vw; /* Limit the width of the text block for the desired layout */
-    box-sizing: border-box; /* Include padding in width calculation */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for true centering (both axes) */
+    text-align: center; /* Center text within its container */
+    max-width: 80vw; /* Allow text to take more width if centered */
+    box-sizing: border-box;
 }
 
 .name {
-    font-family: 'Roboto', sans-serif; /* Using Roboto for a bold, impactful name */
-    font-size: 5vw; /* Responsive font size based on viewport width */
-    font-weight: 700; /* Bold */
-    margin: 0; /* Remove default margin */
-    letter-spacing: 0.1em; /* Increased letter spacing for the "JEROME PASCAL" look */
-    text-transform: uppercase; /* All caps */
-    line-height: 1.2; /* Line height for readability */
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Subtle shadow for text readability on background */
-    white-space: nowrap; /* Prevent "SKY" from wrapping on smaller screens if possible */
+    font-family: 'Roboto', sans-serif; /* You can change this to a different font if you prefer (e.g., 'Pacifico', 'Dancing Script' if imported) */
+    font-size: 8vw; /* Responsive font size */
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.1em;
+    text-transform: lowercase; /* Makes "SKY" appear as "sky" */
+    line-height: 1.2;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    white-space: nowrap; /* Prevent line break if possible for the name */
 }
 
-.tagline {
-    font-family: 'Inter', sans-serif; /* Lighter font for the tagline */
-    font-size: 1.8vw; /* Responsive font size */
-    font-weight: 300; /* Lighter weight */
-    margin-top: 10px; /* Space below the name */
-    letter-spacing: 0.05em;
-    opacity: 0.8; /* Slightly subdued color for the tagline */
-    white-space: nowrap; /* Prevent tagline from wrapping if possible */
-}
-
-/* Social links container positioning and styling, positioned precisely */
+/* Social links container positioning */
 .social-links-container {
-    position: absolute; /* Position explicitly on the page */
-    left: 2vw; /* Distance from the left edge */
-    bottom: 50px; /* Distance from the bottom edge */
+    position: absolute;
+    left: 2vw;
+    bottom: 50px;
     display: flex;
-    flex-direction: column; /* Stack icons vertically */
-    gap: 20px; /* Space between icons */
+    flex-direction: column; /* Stack vertically */
+    gap: 20px;
 }
 
 .social-link {
-    display: flex; /* Use flex to align icon/text if present */
-    align-items: center; /* Vertically center icon/text */
-    text-decoration: none; /* Remove underline from links */
-    color: white; /* Default color for link content */
-    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth hover effects */
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .social-link:hover {
-    transform: translateX(5px); /* Slight slide effect to the right on hover */
-    opacity: 0.8; /* Slightly fade on hover */
+    transform: translateX(5px);
+    opacity: 0.8;
 }
 
 .social-icon {
-    width: 30px !important; /* Fixed icon size - added !important */
-    height: 30px !important; /* Fixed icon size - added !important */
-    /* This filter attempts to make your colored Discord/Roblox icons look white/monochrome. */
-    /* It first makes them grayscale, then significantly brightens them. */
-    filter: grayscale(100%) brightness(300%) drop-shadow(0 0 5px rgba(255,255,255,0.5));
+    width: 30px !important; /* Fixed icon size */
+    height: 30px !important; /* Fixed icon size */
+    /* Filter to make icons appear purple/original color with a glow.
+       'hue-rotate(270deg)' typically shifts blue to purple. Adjust degrees if needed for your specific icon's original color.
+       'saturate(150%)' increases color intensity. */
+    filter: hue-rotate(270deg) saturate(150%) drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); /* Purple glow */
+    /* If your icons are already purple and you just want the glow, use: */
+    /* filter: drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); */
+}
+
+/* About Me Button bottom right */
+.about-me-button {
+    position: absolute;
+    right: 2vw;
+    bottom: 50px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    /* Optional: Add a subtle background to the button for better visibility */
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    /* padding: 8px 15px; */
+    /* border-radius: 5px; */
+}
+
+.about-me-button:hover {
+    transform: translateX(-5px); /* Moves slightly left on hover */
+    opacity: 0.8;
+}
+
+/* About Me Section Styles (appears when scrolled down) */
+.content-section {
+    min-height: 100vh; /* Takes at least full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    /* Background for the About Me section - a semi-transparent light blue */
+    background-color: rgba(135, 206, 235, 0.8); /* Sky Blue with transparency */
+    color: #333; /* Dark text for readability on light background */
+}
+
+.content-card {
+    background-color: rgba(255, 255, 255, 0.95); /* A slightly transparent white card for text */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%; /* Take full width up to max-width */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.content-section h2 {
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.content-section p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #555;
 }
 
 
-/* Media Queries for Responsiveness (adjust font sizes and positioning for smaller screens) */
-@media (max-width: 768px) { /* Tablets and smaller */
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
     .profile-content {
-        left: 5%; /* Adjust left position */
-        max-width: 70vw; /* Allow text block to take more width */
-    }
-    .name {
-        font-size: 8vw; /* Larger name font */
-        white-space: normal; /* Allow text to wrap if necessary */
-    }
-    .tagline {
-        font-size: 3vw; /* Larger tagline font */
-        white-space: normal; /* Allow text to wrap if necessary */
-    }
-    .social-links-container {
-        left: 2vw;
-        bottom: 30px; /* Adjust bottom position */
-        gap: 15px; /* Adjust spacing between icons */
-    }
-    .social-icon {
-        width: 25px !important; /* Smaller icons - added !important */
-        height: 25px !important; /* Smaller icons - added !important */
-    }
-}
-
-@media (max-width: 480px) { /* Small mobile phones */
-    .profile-content {
-        left: 3%;
         max-width: 90vw;
     }
     .name {
-        font-size: 10vw; /* Even larger name font */
-    }
-    .tagline {
-        font-size: 4vw; /* Even larger tagline font */
+        font-size: 10vw;
+        white-space: normal; /* Allow wrapping on smaller screens */
     }
     .social-links-container {
-        left: 2vw;
-        bottom: 20px;
-        gap: 10px;
+        left: 3vw;
+        bottom: 30px;
+        gap: 15px;
     }
     .social-icon {
-        width: 20px !important; /* Smallest icons - added !important */
-        height: 20px !important; /* Smallest icons - added !important */
+        width: 25px !important;
+        height: 25px !important;
+    }
+    .about-me-button {
+        right: 3vw;
+        bottom: 30px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .name {
+        font-size: 12vw;
+    }
+    /* On very small screens, place social icons horizontally below the name for better layout */
+    .social-links-container {
+        position: static; /* Remove absolute positioning */
+        order: 2; /* Place after text if parent uses flexbox */
+        flex-direction: row; /* Horizontal layout */
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px; /* Space from name */
+        bottom: auto; /* Reset bottom */
+        left: auto; /* Reset left */
+    }
+    /* Adjust profile-content for small screens to use flexbox */
+    .hero-screen {
+        flex-direction: column;
+    }
+    .profile-content {
+        position: static; /* Remove absolute positioning */
+        transform: none; /* Remove transform */
+        margin-top: 20vh; /* Push down from top */
+        order: 1; /* Place before social icons */
+    }
+
+    .social-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    .about-me-button {
+        right: 2vw;
+        bottom: 20px;
+        font-size: 0.9em;
+    }
+    /* Specific adjustments for about me content on small screens */
+    .content-card {
+        padding: 20px;
+    }
+    .content-section h2 {
+        font-size: 1.8em;
+    }
+    .content-section p {
+        font-size: 1em;
     }
 }
