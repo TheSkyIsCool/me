@@ -102,15 +102,16 @@ body {
 .social-icon {
     width: 30px !important; /* Fixed icon size */
     height: 30px !important; /* Fixed icon size */
-    /* *** ICON COLOR FIX - Adjusted for darker, more purplish *** */
-    /* This filter aims to shift current light blue to a darker purple.
-       - hue-rotate(240deg): Shifts blue hues significantly towards purple.
-       - saturate(300%): Makes the color much more intense.
-       - brightness(80%): Makes the color darker.
+    /* ICON COLOR FIX: Adjusted for darker, more purplish */
+    /* This filter aims to shift current light blue/cyan towards a darker, richer purple.
+       - hue-rotate(270deg): Shifts cyan/light blue towards magenta/purple more strongly.
+       - saturate(400%): Drastically increases color intensity.
+       - brightness(60%): Makes the color significantly darker.
        - drop-shadow: Adds the glowing effect with a deep purple color.
-       You might still need to slightly adjust 'hue-rotate' value (e.g., 230deg, 250deg)
-       if it's not the perfect shade based on your original icon image's exact blue. */
-    filter: hue-rotate(240deg) saturate(300%) brightness(80%) drop-shadow(0 0 10px rgba(100, 0, 150, 1));
+       This is a very aggressive filter. If this doesn't yield the desired result,
+       it indicates the original icon image colors are too far from purple to be
+       effectively transformed by CSS filters. */
+    filter: hue-rotate(270deg) saturate(400%) brightness(60%) drop-shadow(0 0 10px rgba(80, 0, 120, 1));
 }
 
 /* About Me Button bottom right */
