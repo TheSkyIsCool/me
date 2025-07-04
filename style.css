@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh; /* Make body take up the full viewport height */
+    width: 100vw;  /* Make body take up the full viewport width */
     overflow: hidden; /* CRITICAL: Remove all scrolling */
     font-family: 'Inter', sans-serif; /* Default font */
     color: white; /* Default text color for the page */
@@ -13,38 +14,30 @@ body {
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent the image from repeating */
 
-    /* Flexbox for overall layout to center content */
-    display: flex;
-    justify-content: flex-start; /* Pushes profile content to the left */
-    align-items: center; /* Vertically centers the profile content */
-    position: relative; /* Allows for absolute positioning of social links relative to the body */
+    position: relative; /* Allows for absolute positioning of children elements */
 }
 
-/* Main container for the profile text and social links */
-.main-container {
-    width: 100%; /* Take full width to help with internal positioning */
-    height: 100%; /* Take full height */
-    display: flex;
-    align-items: center; /* Vertically center the profile content within the container */
-    padding-left: 10vw; /* Space from the left edge, responsive */
-    box-sizing: border-box; /* Include padding in the width calculation */
-}
-
-/* Styles for the Name and Tagline */
+/* Styles for the Name and Tagline, positioned precisely */
 .profile-content {
-    text-align: left; /* Align text to the left */
-    max-width: 50%; /* Limit width to resemble the screenshot's layout */
+    position: absolute; /* Position explicitly on the page */
+    top: 50%; /* Start vertical positioning from the middle */
+    left: 10%; /* Distance from the left edge */
+    transform: translateY(-50%); /* Adjust upwards by half its height for true vertical centering */
+    text-align: left; /* Align text within its container to the left */
+    max-width: 40vw; /* Limit the width of the text block for the desired layout */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .name {
-    font-family: 'Roboto', sans-serif; /* A bold, strong font for the name */
-    font-size: 5vw; /* Responsive font size */
+    font-family: 'Roboto', sans-serif; /* Using Roboto for a bold, impactful name */
+    font-size: 5vw; /* Responsive font size based on viewport width */
     font-weight: 700; /* Bold */
     margin: 0; /* Remove default margin */
-    letter-spacing: 0.1em; /* Increased letter spacing for impact */
+    letter-spacing: 0.1em; /* Increased letter spacing for the "JEROME PASCAL" look */
     text-transform: uppercase; /* All caps */
-    line-height: 1.2;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Subtle shadow for readability on background image */
+    line-height: 1.2; /* Line height for readability */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Subtle shadow for text readability on background */
+    white-space: nowrap; /* Prevent "SKY" from wrapping on smaller screens if possible */
 }
 
 .tagline {
@@ -54,12 +47,13 @@ body {
     margin-top: 10px; /* Space below the name */
     letter-spacing: 0.05em;
     opacity: 0.8; /* Slightly subdued color for the tagline */
+    white-space: nowrap; /* Prevent tagline from wrapping if possible */
 }
 
-/* Social links container positioning and styling */
+/* Social links container positioning and styling, positioned precisely */
 .social-links-container {
-    position: absolute; /* Position absolutely within the body */
-    left: 2vw; /* Distance from the left edge, responsive */
+    position: absolute; /* Position explicitly on the page */
+    left: 2vw; /* Distance from the left edge */
     bottom: 50px; /* Distance from the bottom edge */
     display: flex;
     flex-direction: column; /* Stack icons vertically */
@@ -68,77 +62,67 @@ body {
 
 .social-link {
     display: flex; /* Use flex to align icon/text if present */
-    align-items: center;
-    text-decoration: none; /* Remove underline */
-    color: white; /* White color for icons/text */
+    align-items: center; /* Vertically center icon/text */
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Default color for link content */
     transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth hover effects */
 }
 
 .social-link:hover {
-    transform: translateX(5px); /* Slight slide effect on hover */
+    transform: translateX(5px); /* Slight slide effect to the right on hover */
     opacity: 0.8; /* Slightly fade on hover */
 }
 
 .social-icon {
-    width: 30px; /* Icon size */
+    width: 30px; /* Fixed icon size */
     height: 30px;
-    /* Invert colors to make a dark icon white, then adjust brightness/glow */
-    filter: invert(100%) brightness(1.5) drop-shadow(0 0 5px rgba(255,255,255,0.5));
+    /* This filter attempts to make your colored Discord/Roblox icons look white/monochrome. */
+    /* It first makes them grayscale, then significantly brightens them. */
+    filter: grayscale(100%) brightness(300%) drop-shadow(0 0 5px rgba(255,255,255,0.5));
 }
 
-/* If using Font Awesome, uncomment this and adjust size/color as needed */
-/* .social-icon-fa {
-    font-size: 30px;
-    color: white;
-    text-shadow: 0 0 5px rgba(255,255,255,0.5);
-} */
 
-
-/* Media Queries for Responsiveness (adjust font sizes and spacing for smaller screens) */
-@media (max-width: 768px) {
-    .main-container {
-        padding-left: 5vw;
+/* Media Queries for Responsiveness (adjust font sizes and positioning for smaller screens) */
+@media (max-width: 768px) { /* Tablets and smaller */
+    .profile-content {
+        left: 5%; /* Adjust left position */
+        max-width: 70vw; /* Allow text block to take more width */
     }
-
     .name {
-        font-size: 8vw; /* Larger on tablets */
+        font-size: 8vw; /* Larger name font */
+        white-space: normal; /* Allow text to wrap if necessary */
     }
-
     .tagline {
-        font-size: 3vw;
+        font-size: 3vw; /* Larger tagline font */
+        white-space: normal; /* Allow text to wrap if necessary */
     }
-
     .social-links-container {
         left: 2vw;
-        bottom: 30px;
-        gap: 15px;
+        bottom: 30px; /* Adjust bottom position */
+        gap: 15px; /* Adjust spacing between icons */
     }
-
     .social-icon {
-        width: 25px;
+        width: 25px; /* Smaller icons */
         height: 25px;
     }
 }
 
-@media (max-width: 480px) {
-    .main-container {
-        padding-left: 5vw;
+@media (max-width: 480px) { /* Small mobile phones */
+    .profile-content {
+        left: 3%;
+        max-width: 90vw;
     }
-
     .name {
-        font-size: 10vw; /* Even larger on small mobile screens */
+        font-size: 10vw; /* Even larger name font */
     }
-
     .tagline {
-        font-size: 4vw;
+        font-size: 4vw; /* Even larger tagline font */
     }
-
     .social-links-container {
         left: 2vw;
         bottom: 20px;
         gap: 10px;
     }
-
     .social-icon {
         width: 20px;
         height: 20px;
