@@ -15,10 +15,8 @@ body {
     background-position: center center;
     background-attachment: fixed; /* Keep background fixed during scroll */
     background-repeat: no-repeat;
-    /* Initially, overflow-y will be set to 'hidden' by JavaScript until button click */
-    /* It will be set to 'auto' by JavaScript after button click */
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    position: relative; /* For absolutely positioned elements within the body */
+    position: relative; /* For any elements positioned relative to the body (though fixed is preferred here) */
 
     /* Custom Scrollbar Styling (Webkit browsers: Chrome, Safari, Edge) */
     /* Track */
@@ -49,8 +47,9 @@ body {
 .hero-screen {
     height: 100vh; /* Takes full viewport height */
     width: 100vw; /* Takes full viewport width */
-    position: relative; /* For absolute positioning of children */
+    position: relative; /* For absolutely positioning the .profile-content (name) */
     box-sizing: border-box;
+    /* Removed all flexbox properties from here - relying on absolute/fixed for children */
 }
 
 /* Profile text (Name only) - Centered */
@@ -66,24 +65,27 @@ body {
 
 .name {
     font-family: 'Roboto', sans-serif;
-    font-size: 8vw; /* Responsive font size */
+    font-size: 8vw; /* Default for desktop, overridden by media queries for mobile */
     font-weight: 700;
     margin: 0;
     letter-spacing: 0.1em;
     text-transform: lowercase; /* Makes "SKY" appear as "sky" */
     line-height: 1.2;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    white-space: nowrap; /* Prevent line break if possible for the name */
+    white-space: nowrap; /* Prevent line break on desktop, will adjust for mobile */
 }
 
-/* Social links container positioning */
+/* Social links container positioning - NOW FIXED TO VIEWPPORT */
 .social-links-container {
-    position: absolute;
-    left: 2vw;
-    bottom: 50px;
+    position: fixed; /* Crucial: Sticks to the viewport */
+    left: 2vw; /* Desktop default */
+    bottom: 50px; /* Desktop default */
     display: flex;
-    flex-direction: column; /* Stack vertically */
+    flex-direction: column; /* Desktop default: vertical stack */
     gap: 20px;
+    z-index: 100; /* Ensure it's on top of other content */
+    padding: 10px; /* Add some padding to prevent touching screen edges */
+    box-sizing: border-box;
 }
 
 .social-link {
@@ -95,24 +97,21 @@ body {
 }
 
 .social-link:hover {
-    transform: translateX(5px);
+    transform: translateX(5px); /* Desktop hover */
     opacity: 0.8;
 }
 
 .social-icon {
-    width: 30px !important; /* Fixed icon size */
-    height: 30px !important; /* Fixed icon size */
-    /* This filter is ONLY applying the purple glow.
-       It is NOT changing the base color of the image.
-       If your image file is green, it will display green with a purple glow. */
-    filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1)); /* Purple glow */
+    width: 30px !important;
+    height: 30px !important;
+    filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
-/* About Me Button bottom right */
+/* About Me Button positioning - NOW FIXED TO VIEWPPORT */
 .about-me-button {
-    position: absolute;
-    right: 2vw;
-    bottom: 50px;
+    position: fixed; /* Crucial: Sticks to the viewport */
+    right: 2vw; /* Desktop default */
+    bottom: 50px; /* Desktop default */
     text-decoration: none;
     color: white;
     font-size: 1.1em;
@@ -120,24 +119,31 @@ body {
     letter-spacing: 0.05em;
     transition: transform 0.3s ease, opacity 0.3s ease;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    z-index: 100; /* Ensure it's on top of other content */
+    padding: 10px 15px; /* Button styling */
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    white-space: nowrap; /* Prevent button text from wrapping */
 }
 
 .about-me-button:hover {
-    transform: translateX(-5px); /* Moves slightly left on hover */
+    transform: translateX(-5px); /* Desktop hover */
     opacity: 0.8;
+    background-color: rgba(0,0,0,0.4);
 }
 
 /* About Me Section Styles (appears when scrolled down) */
 .content-section {
-    min-height: 100vh; /* Takes at least full viewport height */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    /* Make sure .content-section is relative for absolute positioning of children */
-    position: relative; /* ADDED: For positioning spts-calc-link */
+    position: relative; /* For positioning spts-calc-link */
     /* Background for the About Me section - a translucent gradient to blend */
     background: linear-gradient(
         to bottom,
@@ -176,7 +182,7 @@ body {
 
 /* NEW: Styles for the Calculator Link */
 .spts-calc-link {
-    position: absolute;
+    position: absolute; /* Positioned relative to .content-section */
     bottom: 20px; /* Distance from bottom */
     left: 20px; /* Distance from left */
     font-size: 0.9em; /* Small, but readable text */
@@ -199,35 +205,47 @@ body {
 
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .profile-content {
-        max-width: 90vw;
-    }
+@media (max-width: 768px) { /* Tablet and smaller phones */
     .name {
-        font-size: 10vw;
-        white-space: normal;
+        font-size: clamp(2.5em, 10vw, 4em); /* Adjust clamp range for mobile */
+        white-space: normal; /* Allow name to wrap on mobile */
     }
+
+    /* Social links on mobile: centered horizontal at the bottom */
     .social-links-container {
-        left: 3vw;
-        bottom: 30px;
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for true centering */
+        bottom: 20px; /* Closer to the bottom on mobile */
+        flex-direction: row; /* Horizontal on mobile */
+        width: auto; /* Let content determine width */
         gap: 15px;
+        padding: 5px; /* Adjust padding for fixed positioning on mobile */
+    }
+    .social-link:hover {
+        transform: translateY(-5px); /* Keep a vertical hover for consistency on horizontal layout */
     }
     .social-icon {
         width: 25px !important;
         height: 25px !important;
     }
+
+    /* About Me button on mobile: bottom right */
     .about-me-button {
-        right: 3vw;
-        bottom: 30px;
+        right: 3vw; /* Adjust for mobile */
+        bottom: 30px; /* Adjust for mobile */
         font-size: 1em;
+        padding: 8px 12px;
     }
+    .about-me-button:hover {
+        transform: translateX(-5px); /* Still move left on hover */
+    }
+
     .content-section h2 {
         font-size: 2em;
     }
     .content-section p {
         font-size: 1em;
     }
-    /* Adjust calc link position for smaller screens */
     .spts-calc-link {
         bottom: 15px;
         left: 15px;
@@ -235,29 +253,13 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* Smaller phones */
     .name {
-        font-size: 12vw;
-    }
-    /* On very small screens, adjust hero-screen layout for stacking */
-    .hero-screen {
-        flex-direction: column;
-        justify-content: flex-start; /* Align to top to make space for icons */
-        padding-top: 15vh; /* Adjust as needed */
-    }
-    .profile-content {
-        position: static;
-        transform: none;
-        order: 1;
+        font-size: clamp(2em, 12vw, 3.5em); /* Even smaller min font for very narrow phones */
     }
     .social-links-container {
-        position: static; /* Remove absolute positioning */
-        order: 2; /* Place after text if parent uses flexbox */
-        justify-content: center; /* Center horizontally */
-        width: 100%;
-        margin-top: 20px;
-        bottom: auto; /* Reset bottom */
-        left: auto; /* Reset left */
+        bottom: 15px; /* Even closer to bottom on small phones */
+        gap: 10px;
     }
     .social-icon {
         width: 20px !important;
@@ -265,8 +267,9 @@ body {
     }
     .about-me-button {
         right: 2vw;
-        bottom: 20px;
+        bottom: 20px; /* Adjust for very small phones */
         font-size: 0.9em;
+        padding: 6px 10px;
     }
     .content-section h2 {
         font-size: 1.5em;
@@ -274,7 +277,6 @@ body {
     .content-section p {
         font-size: 0.9em;
     }
-    /* Adjust calc link position for very small screens */
     .spts-calc-link {
         bottom: 10px;
         left: 10px;
