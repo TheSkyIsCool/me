@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sky's shitty website</title>
+
+    <script>
+        history.scrollRestoration = "manual";
+    </script>
+
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg"> 
+    <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg">
 
 </head>
 <body>
@@ -42,8 +47,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Force scroll to top immediately on DOMContentLoaded
-            window.scrollTo(0, 0); // <--- THIS IS THE MODIFIED LINE ADDED HERE
+            // *** IMPORTANT ADDITION:
+            // This ensures the page is scrolled to the very top when the DOM content is loaded.
+            window.scrollTo(0, 0);
 
             const aboutMeButton = document.getElementById('aboutMeButton');
             const aboutMeSection = document.getElementById('about-me-section');
