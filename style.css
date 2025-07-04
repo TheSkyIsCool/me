@@ -102,9 +102,9 @@ body {
 .social-icon {
     width: 30px !important; /* Fixed icon size */
     height: 30px !important; /* Fixed icon size */
-    /* ICON COLOR FIX: Removed ALL color-shifting filters.
-       This filter now *only* applies the purple glow as originally desired.
-       The base color of the icon will be exactly what the image file (discord_icon.png, roblox_icon.png) is. */
+    /* This filter is ONLY applying the purple glow.
+       It is NOT changing the base color of the image.
+       If your image file is green, it will display green with a purple glow. */
     filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1)); /* Purple glow */
 }
 
