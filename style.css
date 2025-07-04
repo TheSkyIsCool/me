@@ -1,4 +1,8 @@
 /* Basic Reset & Body Styling */
+html {
+    scroll-behavior: smooth; /* Ensure smooth scrolling for button click */
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -11,12 +15,35 @@ body {
     background-position: center center;
     background-attachment: fixed; /* Keep background fixed during scroll */
     background-repeat: no-repeat;
-    /* Enable vertical scrolling */
+    /* Initially, overflow-y will be set to 'hidden' by JavaScript until button click */
+    /* It will be set to 'auto' by JavaScript after button click */
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    overflow-y: auto; /* Allow vertical scrolling */
     position: relative; /* For absolutely positioned elements within the body */
-    scroll-behavior: smooth; /* Smooth scrolling when clicking links */
+
+    /* Custom Scrollbar Styling (Webkit browsers: Chrome, Safari, Edge) */
+    /* Track */
+    &::-webkit-scrollbar {
+        width: 10px; /* Width of the scrollbar */
+    }
+
+    /* Handle (the draggable part) */
+    &::-webkit-scrollbar-thumb {
+        background: rgba(138, 43, 226, 0.7); /* Purple color for the scroll handle */
+        border-radius: 5px; /* Rounded corners for the handle */
+        border: 2px solid rgba(255, 255, 255, 0.1); /* Slight border for definition */
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgba(138, 43, 226, 1); /* Darker purple on hover */
+    }
+
+    /* Track background */
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2); /* Transparent dark background for the scroll track */
+    }
 }
+
 
 /* Hero Section (The initial full-screen view) */
 .hero-screen {
@@ -38,7 +65,7 @@ body {
 }
 
 .name {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; /* You can change this to a different font if you prefer (e.g., 'Pacifico', 'Dancing Script' if imported) */
     font-size: 8vw; /* Responsive font size */
     font-weight: 700;
     margin: 0;
@@ -76,15 +103,17 @@ body {
     width: 30px !important; /* Fixed icon size */
     height: 30px !important; /* Fixed icon size */
     /* *** ICON COLOR FIX *** */
-    /* This filter aims to restore original colors and add a glow.
-       If your original images are indeed purple, simply remove any 'hue-rotate' or 'grayscale'.
-       If they are blue and need to be purple, 'hue-rotate(270deg)' typically shifts blue to purple.
-       The 'saturate' property can boost their vibrancy. */
-    filter: saturate(150%) drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); /* Keeps original colors (or close) and adds purple glow */
-    /* If they are blue and you want to specifically make them purple, try this: */
-    /* filter: hue-rotate(270deg) saturate(150%) drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); */
-    /* The best filter depends on the original color of your icon images. If the above doesn't work,
-       you might need to provide true purple versions of your icons. */
+    /* This filter aims to get purple. If your original images are indeed purple,
+       you might only need the drop-shadow filter.
+       If they are blue/green/other, this filter will try to shift them to purple. */
+    filter: hue-rotate(-60deg) saturate(200%) brightness(120%) drop-shadow(0 0 8px rgba(138, 43, 226, 0.9)); /* Attempt to shift to purple and add glow */
+    /* Explanation for filter:
+       - hue-rotate(-60deg): Often shifts green towards purple/magenta, or blue towards more intense purples.
+       - saturate(200%): Increases color intensity.
+       - brightness(120%): Makes them a bit brighter.
+       - drop-shadow: Adds the glowing effect with a purple color.
+       You might need to tweak the `hue-rotate` value (`0deg` to `360deg` or `-360deg`)
+       to find the perfect purple based on your specific source image colors. */
 }
 
 /* About Me Button bottom right */
@@ -106,7 +135,7 @@ body {
     opacity: 0.8;
 }
 
-/* About Me Section Styles */
+/* About Me Section Styles (appears when scrolled down) */
 .content-section {
     min-height: 100vh; /* Takes at least full viewport height */
     display: flex;
@@ -115,34 +144,33 @@ body {
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    /* *** ABOUT ME BACKGROUND FIX *** */
-    /* A translucent gradient to blend with the main background */
+    /* Background for the About Me section - a translucent gradient to blend */
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.3) 0%, /* Darker transparent at top */
-        rgba(0, 0, 0, 0.6) 50%, /* More opaque in middle */
-        rgba(0, 0, 0, 0.3) 100% /* Darker transparent at bottom */
+        rgba(0, 0, 0, 0.4) 0%, /* Slightly transparent black */
+        rgba(0, 0, 0, 0.7) 50%, /* More opaque black in the middle */
+        rgba(0, 0, 0, 0.4) 100% /* Slightly transparent black */
     );
-    /* Alternative gradient matching sky colors: */
-    /* background: linear-gradient(
-        to bottom,
-        rgba(255, 105, 180, 0.3) 0%, /* Pink from sky */
-        rgba(100, 149, 237, 0.6) 50%, /* Blue from sky */
-        rgba(138, 43, 226, 0.3) 100% /* Purple hint */
-    ); */
+    /* This gradient lets the original background image show through subtly.
+       You can adjust the alpha (last number) in rgba() from 0 to 1 for more/less transparency.
+       For a gradient that blends sky colors more directly, try:
+       background: linear-gradient(
+           to bottom,
+           rgba(255, 105, 180, 0.2) 0%, /* Pink from sky */
+           rgba(100, 149, 237, 0.5) 50%, /* Blue from sky */
+           rgba(138, 43, 226, 0.2) 100% /* Purple hint */
+       ); */
 
     color: rgba(255, 255, 255, 0.9); /* White-ish text color */
     text-align: center;
 }
 
-/* Remove the content-card styles as the div is removed from HTML */
-/* .content-card { ... } */
-
+/* About Me content styling (now directly inside .content-section) */
 .content-section h2,
 .content-section p {
     /* Apply glow effect to About Me text */
     text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
-    color: inherit; /* Inherit color from .content-section */
+    color: inherit; /* Inherit color from .content-section (white-ish) */
     margin: 0 0 15px 0; /* Adjust margins as needed */
     max-width: 600px; /* Limit width of text for readability */
     width: 100%;
@@ -198,18 +226,7 @@ body {
     .name {
         font-size: 12vw;
     }
-    /* On very small screens, place social icons horizontally below the name for better layout */
-    .social-links-container {
-        position: static;
-        order: 2;
-        flex-direction: row; /* Horizontal layout */
-        justify-content: center;
-        width: 100%;
-        margin-top: 20px;
-        bottom: auto;
-        left: auto;
-    }
-    /* Adjust hero-screen and profile-content for small screens to use flexbox for stacking */
+    /* On very small screens, adjust hero-screen layout for stacking */
     .hero-screen {
         flex-direction: column;
         justify-content: flex-start; /* Align to top to make space for icons */
@@ -219,6 +236,16 @@ body {
         position: static;
         transform: none;
         order: 1;
+    }
+    .social-links-container {
+        position: static; /* Remove absolute positioning */
+        order: 2; /* Place after text if parent uses flexbox */
+        flex-direction: row; /* Horizontal layout */
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px; /* Space from name */
+        bottom: auto; /* Reset bottom */
+        left: auto; /* Reset left */
     }
     .social-icon {
         width: 20px !important;
