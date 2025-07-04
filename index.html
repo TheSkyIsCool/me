@@ -8,9 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-    <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg"> 
-
+    <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg">
 </head>
 <body>
 
@@ -50,6 +48,48 @@
             // Initially disable scrolling
             body.style.overflowY = 'hidden';
 
+            // Function to check if an element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            // Hero screen fade-in animation
+            const profileContent = document.querySelector('.profile-content');
+            const socialLinksContainer = document.querySelector('.social-links-container');
+            const aboutMeBtn = document.getElementById('aboutMeButton');
+
+            profileContent.style.opacity = '0';
+            profileContent.style.transform = 'translate(-50%, -50%) translateY(20px)';
+            socialLinksContainer.style.opacity = '0';
+            socialLinksContainer.style.transform = 'translateY(20px)';
+            aboutMeBtn.style.opacity = '0';
+            aboutMeBtn.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                profileContent.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
+                profileContent.style.opacity = '1';
+                profileContent.style.transform = 'translate(-50%, -50%) translateY(0)';
+            }, 100);
+
+            setTimeout(() => {
+                socialLinksContainer.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                socialLinksContainer.style.opacity = '1';
+                socialLinksContainer.style.transform = 'translateY(0)';
+            }, 500);
+
+            setTimeout(() => {
+                aboutMeBtn.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                aboutMeBtn.style.opacity = '1';
+                aboutMeBtn.style.transform = 'translateY(0)';
+            }, 800);
+
+
             aboutMeButton.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent default anchor link behavior
                 // Enable scrolling
@@ -58,15 +98,24 @@
                 aboutMeSection.scrollIntoView({ behavior: 'smooth' });
             });
 
-            // Optional: Re-disable scrolling if user scrolls back to hero-screen
-            // This is a bit tricky to implement perfectly for all scroll events,
-            // but for simplicity, we can do it on scroll end or when hero is in view
-            // body.addEventListener('scroll', function() {
-            //      const heroScreenBottom = heroScreen.getBoundingClientRect().bottom;
-            //      if (heroScreenBottom > window.innerHeight - 50) { // Give a small buffer
-            //          body.style.overflowY = 'hidden';
-            //      }
-            // });
+            // Intersection Observer for about-me-section animation
+            const observerOptions = {
+                root: null, // relative to the viewport
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Optional: If you want the animation to run only once
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            observer.observe(aboutMeSection);
         });
     </script>
 
