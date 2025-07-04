@@ -74,8 +74,8 @@ body {
 }
 
 .social-icon {
-    width: 30px; /* Fixed icon size */
-    height: 30px;
+    width: 30px !important; /* Fixed icon size - added !important */
+    height: 30px !important; /* Fixed icon size - added !important */
     /* This filter attempts to make your colored Discord/Roblox icons look white/monochrome. */
     /* It first makes them grayscale, then significantly brightens them. */
     filter: grayscale(100%) brightness(300%) drop-shadow(0 0 5px rgba(255,255,255,0.5));
@@ -102,8 +102,8 @@ body {
         gap: 15px; /* Adjust spacing between icons */
     }
     .social-icon {
-        width: 25px; /* Smaller icons */
-        height: 25px;
+        width: 25px !important; /* Smaller icons - added !important */
+        height: 25px !important; /* Smaller icons - added !important */
     }
 }
 
@@ -124,7 +124,7 @@ body {
         gap: 10px;
     }
     .social-icon {
-        width: 20px;
-        height: 20px;
+        width: 20px !important; /* Smallest icons - added !important */
+        height: 20px !important; /* Smallest icons - added !important */
     }
 }
