@@ -1,241 +1,146 @@
-/* Basic Reset & Body Styling */
+/* General Body Styles */
 body {
-    font-family: 'Inter', sans-serif; /* Global font */
     margin: 0;
     padding: 0;
-    /* --- NEW SKY BACKGROUND --- */
-    background-image: url('images/thesky.jpg'); /* Corrected to .jpg */
-    background-size: cover; /* Cover the entire viewport */
-    background-position: center center; /* Center the image */
-    background-attachment: fixed; /* Keep the background fixed during scroll */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    /* --- END NEW SKY BACKGROUND --- */
-    color: #333; /* Default body text color, but sections will override */
-    line-height: 1.6;
-    scroll-behavior: smooth; /* For smooth scrolling *between* snaps */
-    scroll-snap-type: y mandatory; /* Enable vertical scroll snapping, making it mandatory */
-    overflow-y: scroll; /* Ensure vertical scrolling is always available for snapping */
-}
+    height: 100vh; /* Make body take up the full viewport height */
+    overflow: hidden; /* CRITICAL: Remove all scrolling */
+    font-family: 'Inter', sans-serif; /* Default font */
+    color: white; /* Default text color for the page */
 
-/* Styling for the introductory "sky." section */
-.intro-section {
-    min-height: 100vh; /* Takes full viewport height */
+    /* Background image (thesky.jpg) */
+    background-image: url('images/thesky.jpg');
+    background-size: cover; /* Ensure the image covers the entire viewport */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+
+    /* Flexbox for overall layout to center content */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    /* This section can keep its background if you want it distinct,
-       or you can remove background-color to let the body image show through.
-       Let's keep it solid for clear contrast with the text. */
-    background-color: #87CEEB; /* Sky blue for the intro */
-    color: white; /* White text for contrast on intro */
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative; /* For positioning scroll prompt */
-    scroll-snap-align: start; /* Snap to the start of this section */
-    scroll-snap-stop: always; /* Force stop here */
+    justify-content: flex-start; /* Pushes profile content to the left */
+    align-items: center; /* Vertically centers the profile content */
+    position: relative; /* Allows for absolute positioning of social links relative to the body */
 }
 
-.intro-text {
-    font-size: 15vw;
-    font-weight: 700; /* Bold Inter font */
-    margin: 0;
+/* Main container for the profile text and social links */
+.main-container {
+    width: 100%; /* Take full width to help with internal positioning */
+    height: 100%; /* Take full height */
+    display: flex;
+    align-items: center; /* Vertically center the profile content within the container */
+    padding-left: 10vw; /* Space from the left edge, responsive */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* Styles for the Name and Tagline */
+.profile-content {
+    text-align: left; /* Align text to the left */
+    max-width: 50%; /* Limit width to resemble the screenshot's layout */
+}
+
+.name {
+    font-family: 'Roboto', sans-serif; /* A bold, strong font for the name */
+    font-size: 5vw; /* Responsive font size */
+    font-weight: 700; /* Bold */
+    margin: 0; /* Remove default margin */
+    letter-spacing: 0.1em; /* Increased letter spacing for impact */
+    text-transform: uppercase; /* All caps */
+    line-height: 1.2;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Subtle shadow for readability on background image */
+}
+
+.tagline {
+    font-family: 'Inter', sans-serif; /* Lighter font for the tagline */
+    font-size: 1.8vw; /* Responsive font size */
+    font-weight: 300; /* Lighter weight */
+    margin-top: 10px; /* Space below the name */
     letter-spacing: 0.05em;
-    text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6); /* White glow */
+    opacity: 0.8; /* Slightly subdued color for the tagline */
 }
 
-.scroll-prompt {
-    position: absolute;
-    bottom: 50px; /* Position above the bottom */
-    color: rgba(255, 255, 255, 0.8); /* White arrow on intro */
-    font-size: 1.1em;
-}
-
-.scroll-arrow {
-    display: block;
-    font-size: 2.5em; /* Slightly larger arrow */
-    line-height: 0.8;
-    margin-top: 10px;
-    animation: bounce 2s infinite; /* Gentle bounce animation */
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
-}
-
-/* -------------------- CONTENT SECTIONS (General) -------------------- */
-.content-section {
-    min-height: 100vh; /* Each section takes full viewport height */
+/* Social links container positioning and styling */
+.social-links-container {
+    position: absolute; /* Position absolutely within the body */
+    left: 2vw; /* Distance from the left edge, responsive */
+    bottom: 50px; /* Distance from the bottom edge */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-    box-sizing: border-box;
-    scroll-snap-align: start; /* Snap to the start of each content section */
-    scroll-snap-stop: always; /* THIS IS KEY: Force stop at each section */
-    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for background and text color changes */
-    /* Add a slight backdrop filter to make the solid color sections subtly transparent over the image */
-    backdrop-filter: blur(5px); /* Optional: Adds a slight blur to content behind sections */
-}
-
-.section-content {
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.content-section h2 {
-    color: inherit;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    padding-bottom: 15px;
-    margin-bottom: 25px;
-    font-weight: 700;
-}
-
-.content-section p {
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    color: inherit;
-}
-
-.section-icon {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+    flex-direction: column; /* Stack icons vertically */
+    gap: 20px; /* Space between icons */
 }
 
 .social-link {
-    display: inline-block;
-    background-color: white;
-    color: #333;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 20px;
-    font-weight: 700;
-    transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    display: flex; /* Use flex to align icon/text if present */
+    align-items: center;
+    text-decoration: none; /* Remove underline */
+    color: white; /* White color for icons/text */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth hover effects */
 }
 
 .social-link:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-3px);
+    transform: translateX(5px); /* Slight slide effect on hover */
+    opacity: 0.8; /* Slightly fade on hover */
 }
 
-.section-nav-prompt {
-    margin-top: 30px;
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.8);
+.social-icon {
+    width: 30px; /* Icon size */
+    height: 30px;
+    /* Invert colors to make a dark icon white, then adjust brightness/glow */
+    filter: invert(100%) brightness(1.5) drop-shadow(0 0 5px rgba(255,255,255,0.5));
 }
 
-
-/* -------------------- SPECIFIC SECTION THEMES -------------------- */
-
-/* About Me Section Theme */
-#about-me {
-    background-color: rgba(135, 206, 235, 0.8); /* Slightly transparent sky blue to hint at background image */
+/* If using Font Awesome, uncomment this and adjust size/color as needed */
+/* .social-icon-fa {
+    font-size: 30px;
     color: white;
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+} */
+
+
+/* Media Queries for Responsiveness (adjust font sizes and spacing for smaller screens) */
+@media (max-width: 768px) {
+    .main-container {
+        padding-left: 5vw;
+    }
+
+    .name {
+        font-size: 8vw; /* Larger on tablets */
+    }
+
+    .tagline {
+        font-size: 3vw;
+    }
+
+    .social-links-container {
+        left: 2vw;
+        bottom: 30px;
+        gap: 15px;
+    }
+
+    .social-icon {
+        width: 25px;
+        height: 25px;
+    }
 }
 
-#about-me .social-link {
-    background-color: white;
-    color: #007bff;
-}
+@media (max-width: 480px) {
+    .main-container {
+        padding-left: 5vw;
+    }
 
-#about-me .social-link:hover {
-    background-color: #e6f7ff;
-}
+    .name {
+        font-size: 10vw; /* Even larger on small mobile screens */
+    }
 
+    .tagline {
+        font-size: 4vw;
+    }
 
-/* Roblox Section Theme */
-#roblox-info {
-    background-color: rgba(129, 32, 209, 0.8); /* Slightly transparent Roblox purple */
-    color: white;
-}
+    .social-links-container {
+        left: 2vw;
+        bottom: 20px;
+        gap: 10px;
+    }
 
-#roblox-info .section-content h2,
-#roblox-info .section-content p {
-    font-family: 'Roboto', sans-serif;
-}
-
-#roblox-info .section-content h2 {
-    color: #FFD700;
-    border-bottom-color: rgba(255, 255, 255, 0.3);
-}
-
-#roblox-info .section-content p {
-    color: #eee;
-}
-
-#roblox-info .section-icon {
-    filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
-}
-
-#roblox-info .social-link {
-    background-color: #FFD700;
-    color: #333;
-}
-
-#roblox-info .social-link:hover {
-    background-color: #E6C200;
-    color: #000;
-}
-
-/* Discord Section Theme */
-#discord-info {
-    background-color: rgba(44, 47, 51, 0.8); /* Slightly transparent Discord dark theme */
-    color: #dcddde;
-}
-
-#discord-info .section-content h2,
-#discord-info .section-content p {
-    font-family: 'Inter', sans-serif;
-}
-
-#discord-info .section-content h2 {
-    color: #7289da;
-    border-bottom-color: rgba(114, 137, 218, 0.3);
-}
-
-#discord-info .section-content p {
-    color: #b9bbbe;
-}
-
-#discord-info .section-icon {
-    filter: drop-shadow(0 0 12px rgba(114, 137, 218, 0.8));
-}
-
-#discord-info .social-link {
-    background-color: #7289da;
-    color: white;
-}
-
-#discord-info .social-link:hover {
-    background-color: #677eb4;
-}
-
-
-/* -------------------- FOOTER STYLES -------------------- */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(26, 26, 26, 0.9); /* Slightly transparent dark background for footer */
-    color: #eee;
-    scroll-snap-align: start;
-    min-height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px); /* Optional: Blur content behind footer */
+    .social-icon {
+        width: 20px;
+        height: 20px;
+    }
 }
