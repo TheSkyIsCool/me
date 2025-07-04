@@ -136,6 +136,8 @@ body {
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
+    /* Make sure .content-section is relative for absolute positioning of children */
+    position: relative; /* ADDED: For positioning spts-calc-link */
     /* Background for the About Me section - a translucent gradient to blend */
     background: linear-gradient(
         to bottom,
@@ -172,6 +174,29 @@ body {
     line-height: 1.6;
 }
 
+/* NEW: Styles for the Calculator Link */
+.spts-calc-link {
+    position: absolute;
+    bottom: 20px; /* Distance from bottom */
+    left: 20px; /* Distance from left */
+    font-size: 0.9em; /* Small, but readable text */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Matching text shadow */
+    white-space: nowrap; /* Prevent line break */
+    z-index: 10; /* Ensure it's above other elements if needed */
+}
+
+.spts-calc-link a {
+    color: rgba(255, 255, 255, 0.7); /* Slightly translucent white */
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.spts-calc-link a:hover {
+    color: rgba(255, 255, 255, 1); /* Brighter white on hover */
+    text-decoration: underline;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Subtle white glow on hover */
+}
+
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -201,6 +226,12 @@ body {
     }
     .content-section p {
         font-size: 1em;
+    }
+    /* Adjust calc link position for smaller screens */
+    .spts-calc-link {
+        bottom: 15px;
+        left: 15px;
+        font-size: 0.8em;
     }
 }
 
@@ -242,5 +273,11 @@ body {
     }
     .content-section p {
         font-size: 0.9em;
+    }
+    /* Adjust calc link position for very small screens */
+    .spts-calc-link {
+        bottom: 10px;
+        left: 10px;
+        font-size: 0.75em;
     }
 }
