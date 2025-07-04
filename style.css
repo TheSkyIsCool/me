@@ -23,9 +23,6 @@ body {
     height: 100vh; /* Takes full viewport height */
     width: 100vw; /* Takes full viewport width */
     position: relative; /* For absolute positioning of children */
-    /* display: flex; /* Not strictly needed as children are absolute, but can help for debugging */
-    /* justify-content: center; */
-    /* align-items: center; */
     box-sizing: border-box;
 }
 
@@ -41,7 +38,7 @@ body {
 }
 
 .name {
-    font-family: 'Roboto', sans-serif; /* You can change this to a different font if you prefer (e.g., 'Pacifico', 'Dancing Script' if imported) */
+    font-family: 'Roboto', sans-serif;
     font-size: 8vw; /* Responsive font size */
     font-weight: 700;
     margin: 0;
@@ -78,12 +75,16 @@ body {
 .social-icon {
     width: 30px !important; /* Fixed icon size */
     height: 30px !important; /* Fixed icon size */
-    /* Filter to make icons appear purple/original color with a glow.
-       'hue-rotate(270deg)' typically shifts blue to purple. Adjust degrees if needed for your specific icon's original color.
-       'saturate(150%)' increases color intensity. */
-    filter: hue-rotate(270deg) saturate(150%) drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); /* Purple glow */
-    /* If your icons are already purple and you just want the glow, use: */
-    /* filter: drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); */
+    /* *** ICON COLOR FIX *** */
+    /* This filter aims to restore original colors and add a glow.
+       If your original images are indeed purple, simply remove any 'hue-rotate' or 'grayscale'.
+       If they are blue and need to be purple, 'hue-rotate(270deg)' typically shifts blue to purple.
+       The 'saturate' property can boost their vibrancy. */
+    filter: saturate(150%) drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); /* Keeps original colors (or close) and adds purple glow */
+    /* If they are blue and you want to specifically make them purple, try this: */
+    /* filter: hue-rotate(270deg) saturate(150%) drop-shadow(0 0 5px rgba(150, 0, 200, 0.7)); */
+    /* The best filter depends on the original color of your icon images. If the above doesn't work,
+       you might need to provide true purple versions of your icons. */
 }
 
 /* About Me Button bottom right */
@@ -98,10 +99,6 @@ body {
     letter-spacing: 0.05em;
     transition: transform 0.3s ease, opacity 0.3s ease;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    /* Optional: Add a subtle background to the button for better visibility */
-    /* background-color: rgba(255, 255, 255, 0.1); */
-    /* padding: 8px 15px; */
-    /* border-radius: 5px; */
 }
 
 .about-me-button:hover {
@@ -109,7 +106,7 @@ body {
     opacity: 0.8;
 }
 
-/* About Me Section Styles (appears when scrolled down) */
+/* About Me Section Styles */
 .content-section {
     min-height: 100vh; /* Takes at least full viewport height */
     display: flex;
@@ -118,34 +115,51 @@ body {
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    /* Background for the About Me section - a semi-transparent light blue */
-    background-color: rgba(135, 206, 235, 0.8); /* Sky Blue with transparency */
-    color: #333; /* Dark text for readability on light background */
+    /* *** ABOUT ME BACKGROUND FIX *** */
+    /* A translucent gradient to blend with the main background */
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%, /* Darker transparent at top */
+        rgba(0, 0, 0, 0.6) 50%, /* More opaque in middle */
+        rgba(0, 0, 0, 0.3) 100% /* Darker transparent at bottom */
+    );
+    /* Alternative gradient matching sky colors: */
+    /* background: linear-gradient(
+        to bottom,
+        rgba(255, 105, 180, 0.3) 0%, /* Pink from sky */
+        rgba(100, 149, 237, 0.6) 50%, /* Blue from sky */
+        rgba(138, 43, 226, 0.3) 100% /* Purple hint */
+    ); */
+
+    color: rgba(255, 255, 255, 0.9); /* White-ish text color */
+    text-align: center;
 }
 
-.content-card {
-    background-color: rgba(255, 255, 255, 0.95); /* A slightly transparent white card for text */
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    width: 100%; /* Take full width up to max-width */
-    text-align: center;
+/* Remove the content-card styles as the div is removed from HTML */
+/* .content-card { ... } */
+
+.content-section h2,
+.content-section p {
+    /* Apply glow effect to About Me text */
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    color: inherit; /* Inherit color from .content-section */
+    margin: 0 0 15px 0; /* Adjust margins as needed */
+    max-width: 600px; /* Limit width of text for readability */
+    width: 100%;
     box-sizing: border-box;
 }
 
 .content-section h2 {
-    color: #333;
-    border-bottom: 2px solid #e0e0e0;
+    font-size: 2.5em;
     padding-bottom: 15px;
     margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
     font-weight: 700;
 }
 
 .content-section p {
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    color: #555;
+    font-size: 1.2em;
+    line-height: 1.6;
 }
 
 
@@ -156,7 +170,7 @@ body {
     }
     .name {
         font-size: 10vw;
-        white-space: normal; /* Allow wrapping on smaller screens */
+        white-space: normal;
     }
     .social-links-container {
         left: 3vw;
@@ -172,6 +186,12 @@ body {
         bottom: 30px;
         font-size: 1em;
     }
+    .content-section h2 {
+        font-size: 2em;
+    }
+    .content-section p {
+        font-size: 1em;
+    }
 }
 
 @media (max-width: 480px) {
@@ -180,26 +200,26 @@ body {
     }
     /* On very small screens, place social icons horizontally below the name for better layout */
     .social-links-container {
-        position: static; /* Remove absolute positioning */
-        order: 2; /* Place after text if parent uses flexbox */
+        position: static;
+        order: 2;
         flex-direction: row; /* Horizontal layout */
         justify-content: center;
         width: 100%;
-        margin-top: 20px; /* Space from name */
-        bottom: auto; /* Reset bottom */
-        left: auto; /* Reset left */
+        margin-top: 20px;
+        bottom: auto;
+        left: auto;
     }
-    /* Adjust profile-content for small screens to use flexbox */
+    /* Adjust hero-screen and profile-content for small screens to use flexbox for stacking */
     .hero-screen {
         flex-direction: column;
+        justify-content: flex-start; /* Align to top to make space for icons */
+        padding-top: 15vh; /* Adjust as needed */
     }
     .profile-content {
-        position: static; /* Remove absolute positioning */
-        transform: none; /* Remove transform */
-        margin-top: 20vh; /* Push down from top */
-        order: 1; /* Place before social icons */
+        position: static;
+        transform: none;
+        order: 1;
     }
-
     .social-icon {
         width: 20px !important;
         height: 20px !important;
@@ -209,14 +229,10 @@ body {
         bottom: 20px;
         font-size: 0.9em;
     }
-    /* Specific adjustments for about me content on small screens */
-    .content-card {
-        padding: 20px;
-    }
     .content-section h2 {
-        font-size: 1.8em;
+        font-size: 1.5em;
     }
     .content-section p {
-        font-size: 1em;
+        font-size: 0.9em;
     }
 }
