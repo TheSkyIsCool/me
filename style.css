@@ -47,32 +47,41 @@ body {
 .hero-screen {
     height: 100vh; /* Takes full viewport height */
     width: 100vw; /* Takes full viewport width */
-    position: relative; /* For absolutely positioning the .profile-content (name) */
+    /* --- Centering Fix for "sky." text using Flexbox --- */
+    display: flex;          /* Make it a flex container */
+    justify-content: center; /* Center children horizontally */
+    align-items: center;    /* Center children vertically */
+    /* Removed 'position: relative;' as it's not strictly needed for flexbox's direct children.
+       If you add other absolutely positioned children *within* hero-screen later, you might re-add it. */
     box-sizing: border-box;
-    /* Removed all flexbox properties from here - relying on absolute/fixed for children */
 }
 
-/* Profile text (Name only) - Centered */
+/* Profile text (Name only) - Centered by parent's Flexbox */
 .profile-content {
-    position: absolute; /* Position explicitly on the page */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Adjust for true centering (both axes) */
-    text-align: center; /* Center text within its container */
+    /* --- Centering Fix: Remove absolute positioning --- */
+    /* These properties are now handled by the .hero-screen's flexbox */
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    text-align: center; /* Ensures the text inside is centered in case of text wrapping */
     max-width: 80vw; /* Allow text to take more width if centered */
     box-sizing: border-box;
+    /* Ensure no conflicting margins or paddings are pushing it off center */
+    margin: 0; /* Explicitly set margin to 0 to prevent external spacing */
+    padding: 0; /* Explicitly set padding to 0 */
 }
 
 .name {
     font-family: 'Roboto', sans-serif;
     font-size: 8vw; /* Default for desktop, overridden by media queries for mobile */
     font-weight: 700;
-    margin: 0;
+    margin: 0; /* Ensure no default browser margin is pushing it */
     letter-spacing: 0.1em;
     text-transform: lowercase; /* Makes "SKY" appear as "sky" */
-    line-height: 1.2;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     white-space: nowrap; /* Prevent line break on desktop, will adjust for mobile */
+    line-height: 1.2; /* Add this if it was removed, or keep your existing value if different */
 }
 
 /* Social links container positioning - NOW FIXED TO VIEWPPORT */

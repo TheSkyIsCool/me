@@ -17,11 +17,11 @@
 <body>
 
     <div class="hero-screen" id="heroScreen">
-        <div class="profile-content" data-aos="fade"> 
+        <div class="profile-content" data-aos="flip-up" data-aos-easing="ease-out-back" data-aos-duration="1500"> 
             <h1 class="name">sky.</h1>
         </div>
 
-        <div class="social-links-container" data-aos="fade-up" data-aos-delay="300"> 
+        <div class="social-links-container" data-aos="zoom-in" data-aos-delay="500" data-aos-duration="1000"> 
             <a href="https://discord.com/users/852844724456652829" target="_blank" rel="noopener noreferrer" class="social-link">
                 <img src="images/discord_icon.png" alt="Discord" class="social-icon">
             </a>
@@ -30,7 +30,7 @@
             </a>
         </div>
 
-        <a href="#" id="aboutMeButton" class="about-me-button" data-aos="fade-up" data-aos-delay="600">about meeee →</a>
+        <a href="#" id="aboutMeButton" class="about-me-button" data-aos="swing" data-aos-delay="1000" data-aos-duration="1200">about meeee →</a>
     </div>
 
     <section id="about-me-section" class="content-section">
@@ -46,8 +46,9 @@
     <script>
         // Initialize AOS animations with properties for smoother, non-disruptive effects
         AOS.init({
-            duration: 1000, // Animation duration in milliseconds
-            once: true,    // Whether animation should happen only once scrolling down
+            // These are global settings. Individual data-aos-duration/delay override these.
+            duration: 1000, // Default animation duration in milliseconds
+            once: true,    // Animation happens only once when scrolling down
             offset: 50,    // Pixels from the bottom of the window to trigger the animation
         });
 
@@ -57,7 +58,7 @@
             const heroScreen = document.getElementById('heroScreen');
             const body = document.body;
 
-            // Initially disable scrolling
+            // Initially disable scrolling to keep the hero screen fixed until interaction
             body.style.overflowY = 'hidden';
 
             aboutMeButton.addEventListener('click', function(event) {
