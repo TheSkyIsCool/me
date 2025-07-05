@@ -3,60 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sky's goofy website</title>
+    <title>sky's website</title>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const audioPlayer = document.getElementById('audioPlayer');
-            const trackTitle = document.getElementById('trackTitle');
-            const playPauseButton = document.getElementById('playPause');
-            const nextTrackButton = document.getElementById('nextTrack');
-            const prevTrackButton = document.getElementById('prevTrack');
+            const aboutMeButton = document.getElementById('aboutMeButton');
+            const aboutMeSection = document.getElementById('about-me-section');
 
-            const tracks = [
-                { title: "Cartoon - On & On (feat. Daniel Levi)", src: "https://www.youtube.com/watch?v=TW9d8vYrVFQ" },
-                { title: "Alan Walker - Fade", src: "https://www.youtube.com/watch?v=3nQNiWdeH2Q" },
-                { title: "Elektronomia - Sky High", src: "https://www.youtube.com/watch?v=9iHM6X6uUH8" },
-                { title: "DEAF KEV - Invincible", src: "https://www.youtube.com/watch?v=__CRWE-L45k" }
-            ];
-
-            let currentTrackIndex = 0;
-
-            // Load the initial track
-            function loadTrack(index) {
-                const track = tracks[index];
-                audioPlayer.src = track.src;
-                trackTitle.innerText = track.title;
-                audioPlayer.play();
-            }
-
-            // Play/Pause functionality
-            playPauseButton.addEventListener('click', () => {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    playPauseButton.innerText = "⏸ Pause";
-                } else {
-                    audioPlayer.pause();
-                    playPauseButton.innerText = "▶ Play";
-                }
+            aboutMeButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default anchor link behavior
+                aboutMeSection.scrollIntoView({ behavior: 'smooth' });
             });
-
-            // Next track functionality
-            nextTrackButton.addEventListener('click', () => {
-                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-                loadTrack(currentTrackIndex);
-                playPauseButton.innerText = "⏸ Pause";
-            });
-
-            // Previous track functionality
-            prevTrackButton.addEventListener('click', () => {
-                currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-                loadTrack(currentTrackIndex);
-                playPauseButton.innerText = "⏸ Pause";
-            });
-
-            // Load the first track by default
-            loadTrack(currentTrackIndex);
         });
     </script>
 
@@ -83,15 +40,15 @@
             </a>
         </div>
 
-        <a href="#" id="aboutMeButton" class="about-me-button">about meeee →</a>
+        <a href="#about-me-section" id="aboutMeButton" class="about-me-button">about meeee →</a>
     </div>
 
     <section id="about-me-section" class="content-section">
-        <h2>Heyo I'm Sky!</h2>
-        <p>I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
+        <h2 class="about-title">About Me</h2>
+        <p class="about-description">Heyo I'm Sky! I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
 
         <div class="spts-calc-link">
-            <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
+            <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">Calculator for SPTS OG!! (made by me)</a>
         </div>
     </section>
 
@@ -99,15 +56,36 @@
         <h2>🎵 Loud NCS Music 🎵</h2>
         <p>Enjoy the most nostalgic, loud, and goofy music tracks from NCS!</p>
 
-        <!-- Custom Music Player -->
+        <!-- Embedded YouTube Videos -->
         <div class="music-player">
-            <h3 id="trackTitle">Track Title</h3>
-            <audio id="audioPlayer" controls></audio>
-            <div class="music-controls">
-                <button id="prevTrack">⏮ Previous</button>
-                <button id="playPause">▶ Play</button>
-                <button id="nextTrack">⏭ Next</button>
-            </div>
+            <iframe 
+                src="https://www.youtube.com/embed/TW9d8vYrVFQ?autoplay=1" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen 
+                class="music-iframe">
+            </iframe>
+            <iframe 
+                src="https://www.youtube.com/embed/3nQNiWdeH2Q?autoplay=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen 
+                class="music-iframe">
+            </iframe>
+            <iframe 
+                src="https://www.youtube.com/embed/9iHM6X6uUH8?autoplay=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen 
+                class="music-iframe">
+            </iframe>
+            <iframe 
+                src="https://www.youtube.com/embed/__CRWE-L45k?autoplay=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen 
+                class="music-iframe">
+            </iframe>
         </div>
     </section>
 
