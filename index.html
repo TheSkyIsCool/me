@@ -38,15 +38,7 @@
 
     <section id="about-me-section" class="content-section">
         <h2>Heyo I'm Sky!</h2>
-
-        <div class="pixel-reveal-box">
-            <img src="images/thesky2.jpg" alt="Sky's Picture" class="initial-image">
-            <div class="pixel-overlay"></div> <div class="reveal-content">
-                <p>I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
-                </div>
-        </div>
-
-        <p class="about-me-paragraph">I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
+        <p>I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
 
         <div class="spts-calc-link">
             <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
@@ -55,6 +47,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // *** IMPORTANT ADDITION:
+            // This ensures the page is scrolled to the very top when the DOM content is loaded.
             window.scrollTo(0, 0);
 
             const aboutMeButton = document.getElementById('aboutMeButton');
@@ -62,13 +56,26 @@
             const heroScreen = document.getElementById('heroScreen');
             const body = document.body;
 
+            // Initially disable scrolling
             body.style.overflowY = 'hidden';
 
             aboutMeButton.addEventListener('click', function(event) {
-                event.preventDefault();
+                event.preventDefault(); // Prevent default anchor link behavior
+                // Enable scrolling
                 body.style.overflowY = 'auto';
+                // Scroll to the about me section smoothly
                 aboutMeSection.scrollIntoView({ behavior: 'smooth' });
             });
+
+            // Optional: Re-disable scrolling if user scrolls back to hero-screen
+            // This is a bit tricky to implement perfectly for all scroll events,
+            // but for simplicity, we can do it on scroll end or when hero is in view
+            // body.addEventListener('scroll', function() {
+            //      const heroScreenBottom = heroScreen.getBoundingClientRect().bottom;
+            //      if (heroScreenBottom > window.innerHeight - 50) { // Give a small buffer
+            //          body.style.overflowY = 'hidden';
+            //      }
+            // });
         });
     </script>
 

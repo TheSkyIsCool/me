@@ -49,6 +49,7 @@ body {
     width: 100vw; /* Takes full viewport width */
     position: relative; /* For absolutely positioning the .profile-content (name) */
     box-sizing: border-box;
+    /* Removed all flexbox properties from here - relying on absolute/fixed for children */
 }
 
 /* Profile text (Name only) - Centered */
@@ -142,255 +143,122 @@ body {
     align-items: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    position: relative;
+    position: relative; /* For positioning spts-calc-link */
+    /* Background for the About Me section - a translucent gradient to blend */
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0.7) 50%,
-        rgba(0, 0, 0, 0.4) 100%
+        rgba(0, 0, 0, 0.4) 0%, /* Slightly transparent black */
+        rgba(0, 0, 0, 0.7) 50%, /* More opaque black in the middle */
+        rgba(0, 0, 0, 0.4) 100% /* Slightly transparent black */
     );
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9); /* White-ish text color */
     text-align: center;
 }
 
-/* Global H2 in content-section (for "Heyo I'm Sky!") */
+/* About Me content styling (now directly inside .content-section) */
+.content-section h2,
+.content-section p {
+    /* Apply glow effect to About Me text */
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    color: inherit; /* Inherit color from .content-section (white-ish) */
+    margin: 0 0 15px 0; /* Adjust margins as needed */
+    max-width: 600px; /* Limit width of text for readability */
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .content-section h2 {
     font-size: 2.5em;
     padding-bottom: 15px;
-    margin-bottom: 25px; /* Adjust margin to allow space for the box */
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
     font-weight: 700;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
-    color: inherit;
-    max-width: 600px;
-    width: 100%;
-    box-sizing: border-box;
 }
 
-/* New class for the main About Me paragraph, NOT in the pixel box */
-.about-me-paragraph {
+.content-section p {
     font-size: 1.2em;
     line-height: 1.6;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.6); /* Apply glow effect to About Me text */
-    margin: 15px 0; /* Add some margin around the text */
-    max-width: 600px; /* Limit width for readability */
-    width: 100%;
-    box-sizing: border-box;
 }
 
-
-/* --- NEW PIXEL REVEAL BOX STYLES --- */
-.pixel-reveal-box {
-    --pixel-grid-size: 20; /* Number of pixels on one side (e.g., 20x20 grid) */
-    --transition-duration: 0.6s; /* Total time for the pixel fade-out */
-    --pixel-delay-stagger: 0.02s; /* Delay between each pixel appearing (not fully utilized in pure CSS) */
-
-    position: relative;
-    width: 400px; /* Fixed width of the box */
-    height: 250px; /* Fixed height of the box */
-    overflow: hidden;
-    margin: 30px 0; /* Space above and below the box */
-    box-shadow: 0 0 25px rgba(138, 43, 226, 0.7); /* Purple glow */
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #000; /* Fallback background for when content shows */
-}
-
-.pixel-reveal-box:hover {
-    box-shadow: 0 0 35px rgba(138, 43, 226, 1); /* Brighter glow on hover */
-}
-
-/* The initial, clear image */
-.initial-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 2; /* Below the pixel overlay, above the content */
-    transition: opacity var(--transition-duration) ease-out; /* Image fades out */
-}
-
-/* The pixel overlay that will appear and then dissolve */
-.pixel-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 3; /* On top of the initial image */
-    background-image: url('images/thesky2.jpg'); /* The image to pixelate */
-    background-size: cover; /* Cover the box area */
-    pointer-events: none; /* Allow interaction with elements below if needed */
-
-    /* Initial state: not pixelated, fully transparent (will be made opaque on hover) */
-    opacity: 0;
-    transition: opacity 0.1s ease-in; /* Quick fade in for the pixelated version */
-
-    /* Pseudo-elements for the individual pixel cells */
-    display: grid;
-    grid-template-columns: repeat(var(--pixel-grid-size), 1fr);
-    grid-template-rows: repeat(var(--pixel-grid-size), 1fr);
-}
-
-/* This is the magic for individual pixel cells within the overlay */
-.pixel-overlay::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Apply pixelation to the background of THIS pseudo-element */
-    background-image: url('images/thesky2.jpg');
-    background-size: calc(var(--pixel-grid-size) * 100%) calc(var(--pixel-grid-size) * 100%); /* Make image background huge for pixel effect */
-    background-repeat: no-repeat;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
-    opacity: 0; /* Initially hidden */
-    transform: scale(0); /* Start scaled down */
-    transition: transform var(--transition-duration) ease-out, opacity var(--transition-duration) ease-out;
-}
-
-/* On hover, make the initial image disappear */
-.pixel-reveal-box:hover .initial-image {
-    opacity: 0;
-}
-
-/* On hover, make the pixel overlay appear pixelated */
-.pixel-reveal-box:hover .pixel-overlay {
-    opacity: 1; /* Make the pixelated background visible */
-}
-
-/* On hover, for the pixel overlay itself, transition its background to dissolve */
-.pixel-reveal-box:hover .pixel-overlay::before {
-    opacity: 0; /* The pixelated layer fades out */
-    transform: scale(1.2); /* Pixels might slightly grow or move out */
-}
-
-
-/* Content to be revealed */
-.reveal-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    box-sizing: border-box;
-    z-index: 1; /* Below the initial image and pixel overlay */
-    background-color: rgba(0, 0, 0, 0.7); /* Dark background for readability */
-    color: rgba(255, 255, 255, 0.9);
-    text-align: center;
-    opacity: 0; /* Initially hidden */
-    transform: scale(0.95); /* Slightly scaled down */
-    transition: opacity var(--transition-duration) ease-in, transform var(--transition-duration) ease-in;
-}
-
-.pixel-reveal-box:hover .reveal-content {
-    opacity: 1; /* Show content on hover */
-    transform: scale(1); /* Scale to normal size */
-    z-index: 4; /* Bring to front on hover */
-}
-
-/* Specific styling for the paragraph *inside* the pixel box */
-.reveal-content p {
-    font-size: 1em; /* Adjust font size for the box */
-    line-height: 1.4;
-    margin: 0; /* Reset margins for content within the box */
-    padding: 0;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    max-width: 90%; /* Keep content from hitting edges */
-}
-
-/* Original styles for the Calculator Link, now outside the pixel box */
+/* NEW: Styles for the Calculator Link */
 .spts-calc-link {
-    /* Kept original positioning, which is relative to the content-section's flow */
-    margin-top: 20px; /* Space from the paragraph above */
-    font-size: 0.9em;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    white-space: nowrap;
+    position: absolute; /* Positioned relative to .content-section */
+    bottom: 20px; /* Distance from bottom */
+    left: 20px; /* Distance from left */
+    font-size: 0.9em; /* Small, but readable text */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Matching text shadow */
+    white-space: nowrap; /* Prevent line break */
     z-index: 10; /* Ensure it's above other elements if needed */
 }
 
 .spts-calc-link a {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7); /* Slightly translucent white */
     text-decoration: none;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .spts-calc-link a:hover {
-    color: rgba(255, 255, 255, 1);
+    color: rgba(255, 255, 255, 1); /* Brighter white on hover */
     text-decoration: underline;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Subtle white glow on hover */
 }
 
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Tablet and smaller phones */
     .name {
-        font-size: clamp(2.5em, 10vw, 4em);
-        white-space: normal;
+        font-size: clamp(2.5em, 10vw, 4em); /* Adjust clamp range for mobile */
+        white-space: normal; /* Allow name to wrap on mobile */
     }
+
+    /* Social links on mobile: centered horizontal at the bottom */
     .social-links-container {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 20px;
-        flex-direction: row;
-        width: auto;
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for true centering */
+        bottom: 20px; /* Closer to the bottom on mobile */
+        flex-direction: row; /* Horizontal on mobile */
+        width: auto; /* Let content determine width */
         gap: 15px;
-        padding: 5px;
+        padding: 5px; /* Adjust padding for fixed positioning on mobile */
     }
     .social-link:hover {
-        transform: translateY(-5px);
+        transform: translateY(-5px); /* Keep a vertical hover for consistency on horizontal layout */
     }
     .social-icon {
         width: 25px !important;
         height: 25px !important;
     }
+
+    /* About Me button on mobile: bottom right */
     .about-me-button {
-        right: 3vw;
-        bottom: 30px;
+        right: 3vw; /* Adjust for mobile */
+        bottom: 30px; /* Adjust for mobile */
         font-size: 1em;
         padding: 8px 12px;
     }
     .about-me-button:hover {
-        transform: translateX(-5px);
-    }
-    .content-section h2 {
-        font-size: 2em;
-        margin-bottom: 15px; /* Adjust margin for the box */
-    }
-    .about-me-paragraph { /* Specific for the main text */
-        font-size: 1em;
+        transform: translateX(-5px); /* Still move left on hover */
     }
 
-    /* Adjust pixel image box for smaller screens */
-    .pixel-reveal-box {
-        width: 300px;
-        height: 180px;
-        margin: 20px 0;
+    .content-section h2 {
+        font-size: 2em;
     }
-    .reveal-content p { /* Specific for text inside the pixel box */
-        font-size: 0.9em;
+    .content-section p {
+        font-size: 1em;
     }
-    .spts-calc-link { /* Remains separate */
+    .spts-calc-link {
+        bottom: 15px;
+        left: 15px;
         font-size: 0.8em;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* Smaller phones */
     .name {
-        font-size: clamp(2em, 12vw, 3.5em);
+        font-size: clamp(2em, 12vw, 3.5em); /* Even smaller min font for very narrow phones */
     }
     .social-links-container {
-        bottom: 15px;
+        bottom: 15px; /* Even closer to bottom on small phones */
         gap: 10px;
     }
     .social-icon {
@@ -399,29 +267,19 @@ body {
     }
     .about-me-button {
         right: 2vw;
-        bottom: 20px;
+        bottom: 20px; /* Adjust for very small phones */
         font-size: 0.9em;
         padding: 6px 10px;
     }
     .content-section h2 {
         font-size: 1.5em;
-        margin-bottom: 10px;
     }
-    .about-me-paragraph { /* Specific for the main text */
+    .content-section p {
         font-size: 0.9em;
     }
-
-    /* Adjust pixel image box for very small screens */
-    .pixel-reveal-box {
-        width: 250px;
-        height: 150px;
-        margin: 15px 0;
-    }
-    .reveal-content p { /* Specific for text inside the pixel box */
-        font-size: 0.8em;
-    }
-    .spts-calc-link { /* Remains separate */
+    .spts-calc-link {
+        bottom: 10px;
+        left: 10px;
         font-size: 0.75em;
-        margin-top: 15px;
     }
 }
