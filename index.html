@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Roboto:wght@400;700&display=wrap" rel="stylesheet">
 
     <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg">
 
@@ -38,20 +38,21 @@
 
     <section id="about-me-section" class="content-section">
         <h2>Heyo I'm Sky!</h2>
-        <div class="pixel-transition-container">
-            <img src="images/thesky2.jpg" alt="Pixelated Sky" class="pixel-transition-image">
-        </div>
-        <p>I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
 
-        <div class="spts-calc-link">
-            <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
+        <div class="pixel-reveal-box">
+            <div class="pixel-overlay"></div>
+            <img src="images/thesky2.jpg" alt="Pixelated Sky" class="pixel-base-image">
+            <div class="reveal-content">
+                <p>I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
+                <div class="spts-calc-link">
+                    <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
+                </div>
+            </div>
         </div>
-    </section>
+        </section>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // *** IMPORTANT ADDITION:
-            // This ensures the page is scrolled to the very top when the DOM content is loaded.
             window.scrollTo(0, 0);
 
             const aboutMeButton = document.getElementById('aboutMeButton');
@@ -59,26 +60,13 @@
             const heroScreen = document.getElementById('heroScreen');
             const body = document.body;
 
-            // Initially disable scrolling
             body.style.overflowY = 'hidden';
 
             aboutMeButton.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default anchor link behavior
-                // Enable scrolling
+                event.preventDefault();
                 body.style.overflowY = 'auto';
-                // Scroll to the about me section smoothly
                 aboutMeSection.scrollIntoView({ behavior: 'smooth' });
             });
-
-            // Optional: Re-disable scrolling if user scrolls back to hero-screen
-            // This is a bit tricky to implement perfectly for all scroll events,
-            // but for simplicity, we can do it on scroll end or when hero is in view
-            // body.addEventListener('scroll', function() {
-            //      const heroScreenBottom = heroScreen.getBoundingClientRect().bottom;
-            //      if (heroScreenBottom > window.innerHeight - 50) { // Give a small buffer
-            //          body.style.overflowY = 'hidden';
-            //      }
-            // });
         });
     </script>
 
