@@ -7,6 +7,57 @@
 
     <script>
         history.scrollRestoration = "manual";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const musicButton = document.getElementById('musicButton');
+            const musicPlayer = document.getElementById('musicPlayer');
+            const audio = document.getElementById('audioPlayer');
+            const trackTitle = document.getElementById('trackTitle');
+            const tracks = [
+                { title: "NCS - Cartoon - On & On", src: "https://www.youtube.com/watch?v=TW9d8vYrVFQ" },
+                { title: "NCS - Alan Walker - Fade", src: "https://www.youtube.com/watch?v=3nQNiWdeH2Q" },
+                { title: "NCS - Elektronomia - Sky High", src: "https://www.youtube.com/watch?v=9iHM6X6uUH8" },
+                { title: "NCS - DEAF KEV - Invincible", src: "https://www.youtube.com/watch?v=__CRWE-L45k" },
+            ];
+            let currentTrack = 0;
+
+            // Toggle Music Player Visibility
+            musicButton.addEventListener('click', () => {
+                musicPlayer.classList.toggle('visible');
+                if (musicPlayer.classList.contains('visible')) {
+                    audio.src = tracks[currentTrack].src;
+                    trackTitle.innerText = tracks[currentTrack].title;
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            });
+
+            // Play Next Track
+            document.getElementById('nextTrack').addEventListener('click', () => {
+                currentTrack = (currentTrack + 1) % tracks.length;
+                audio.src = tracks[currentTrack].src;
+                trackTitle.innerText = tracks[currentTrack].title;
+                audio.play();
+            });
+
+            // Play Previous Track
+            document.getElementById('prevTrack').addEventListener('click', () => {
+                currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+                audio.src = tracks[currentTrack].src;
+                trackTitle.innerText = tracks[currentTrack].title;
+                audio.play();
+            });
+
+            // Pause/Play Toggle
+            document.getElementById('playPause').addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            });
+        });
     </script>
 
     <link rel="stylesheet" href="style.css">
@@ -32,33 +83,18 @@
             </a>
         </div>
 
-        <a href="#about-me-section" id="aboutMeButton" class="about-me-button">about meeee →</a>
+        <button id="musicButton" class="music-button">🎵 Play Music 🎵</button>
     </div>
 
-    <section id="about-me-section" class="content-section">
-        <h2 class="about-title">Heyo I'm Sky!</h2>
-        <p class="about-description">I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
-
-        <div class="spts-calc-link">
-            <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
+    <div id="musicPlayer" class="music-player">
+        <h2 id="trackTitle">Track Title</h2>
+        <audio id="audioPlayer" controls></audio>
+        <div class="music-controls">
+            <button id="prevTrack">⏮ Previous</button>
+            <button id="playPause">⏯ Play/Pause</button>
+            <button id="nextTrack">⏭ Next</button>
         </div>
-    </section>
-
-    <section id="music-section" class="content-section music-section">
-        <h2>🎵 Loud NCS Music 🎵</h2>
-        <p>Enjoy the most nostalgic, loud, and goofy music tracks from NCS!</p>
-
-        <!-- Embedded YouTube Playlist -->
-        <div class="music-player">
-            <iframe 
-                src="https://www.youtube.com/embed/PLRBp0Fe2Js?autoplay=1&loop=1&playlist=PLRBp0Fe2Js" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen 
-                class="music-iframe">
-            </iframe>
-        </div>
-    </section>
+    </div>
 
 </body>
 </html>

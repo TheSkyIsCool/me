@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    color: white; /* Default text color for the hero section */
+    color: white;
     line-height: 1.6;
     background-image: url('images/thesky.jpg');
     background-size: cover;
@@ -102,71 +102,61 @@ body {
     filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
-/* About Me Button */
-.about-me-button {
+/* Music Button */
+.music-button {
     position: fixed;
+    top: 10vh;
     right: 5vw;
-    bottom: 10vh;
-    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    font-size: 1em;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    animation: pulseBoom 2s infinite ease-in-out; /* Pulsing animation */
 }
 
-.about-me-button:hover {
+.music-button:hover {
     transform: scale(1.2);
-    opacity: 0.8;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* About Me Section */
-.content-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 10px;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0.7) 50%,
-        rgba(0, 0, 0, 0.4) 100%
-    );
-    color: rgba(255, 255, 255, 0.9);
-    text-align: center;
-}
-
-/* Music Section */
-.music-section {
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(0, 0, 0, 0.9) 100%
-    );
-    color: rgba(255, 255, 255, 0.9);
-    text-align: center;
-    animation: pulseBoom 3s infinite ease-in-out; /* Pulsing animation */
-}
-
+/* Music Player */
 .music-player {
-    width: 80%;
-    max-width: 800px;
-    margin-top: 20px;
-}
-
-.music-iframe {
-    width: 100%;
-    height: 200px;
+    position: fixed;
+    bottom: 5vh;
+    left: 5vw;
+    width: 90vw;
+    max-width: 600px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: white;
+    display: none;
+}
+
+.music-player.visible {
+    display: block;
+}
+
+.music-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.music-controls button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.music-controls button:hover {
+    transform: scale(1.1);
 }
