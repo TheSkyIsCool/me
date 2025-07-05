@@ -7,42 +7,48 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    color: white;
+    color: white; /* Default text color for the hero section */
     line-height: 1.6;
     background-image: url('images/thesky.jpg');
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed; /* Keep background fixed during scroll */
+    background-attachment: fixed;
     background-repeat: no-repeat;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    position: relative; /* For positioned elements */
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* Fade-in Animation */
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
+/* Goofy Animations */
+@keyframes bounceBoom {
+    0%, 100% {
         transform: translateY(0);
     }
+    50% {
+        transform: translateY(-50px) scale(1.1);
+    }
 }
 
-/* Pulse Animation */
-@keyframes pulse {
+@keyframes shakeBoom {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-15px);
+    }
+    75% {
+        transform: translateX(15px);
+    }
+}
+
+@keyframes pulseBoom {
     0% {
         transform: scale(1);
-        opacity: 1;
     }
     50% {
-        transform: scale(1.05);
-        opacity: 0.8;
+        transform: scale(1.2);
     }
     100% {
         transform: scale(1);
-        opacity: 1;
     }
 }
 
@@ -55,7 +61,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in effect for the whole section */
+    animation: bounceBoom 2s infinite ease-in-out; /* Goofy bounce animation */
 }
 
 /* Profile text (Name only) */
@@ -68,7 +74,7 @@ body {
     text-transform: lowercase;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
-    animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in effect */
+    animation: shakeBoom 3s infinite ease-in-out; /* Shaking animation */
 }
 
 /* Social Links */
@@ -80,7 +86,7 @@ body {
     flex-direction: column;
     gap: 15px;
     z-index: 100;
-    animation: fadeIn 2s ease-in-out forwards; /* Fade-in effect */
+    animation: pulseBoom 1.5s infinite ease-in-out; /* Pulsing animation */
 }
 
 .social-link {
@@ -112,7 +118,7 @@ body {
 }
 
 .about-me-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
     opacity: 0.8;
 }
 
@@ -134,26 +140,33 @@ body {
     text-align: center;
 }
 
-/* Goofy effects for About Me content */
-.about-title {
-    font-size: 2em;
-    padding-bottom: 10px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    animation: pulse 2s infinite ease-in-out; /* Gentle pulse effect */
+/* Music Section */
+.music-section {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    animation: pulseBoom 3s infinite ease-in-out; /* Pulsing animation */
 }
 
-.about-description {
-    font-size: 1em;
-    line-height: 1.4;
-    animation: pulse 3s infinite ease-in-out; /* Gentle pulse effect */
+.music-player {
+    width: 80%;
+    max-width: 800px;
+    margin-top: 20px;
 }
 
-.spts-calc-link a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-
-.spts-calc-link a:hover {
-    transform: scale(1.2);
+.music-iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
