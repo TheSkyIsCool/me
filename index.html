@@ -47,13 +47,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // *** IMPORTANT ADDITION:
-            // This ensures the page is scrolled to the very top when the DOM content is loaded.
+            // Scroll to top on load
             window.scrollTo(0, 0);
 
             const aboutMeButton = document.getElementById('aboutMeButton');
             const aboutMeSection = document.getElementById('about-me-section');
-            const heroScreen = document.getElementById('heroScreen');
             const body = document.body;
 
             // Initially disable scrolling
@@ -63,19 +61,9 @@
                 event.preventDefault(); // Prevent default anchor link behavior
                 // Enable scrolling
                 body.style.overflowY = 'auto';
-                // Scroll to the about me section smoothly
+                // Scroll to the about-me section smoothly
                 aboutMeSection.scrollIntoView({ behavior: 'smooth' });
             });
-
-            // Optional: Re-disable scrolling if user scrolls back to hero-screen
-            // This is a bit tricky to implement perfectly for all scroll events,
-            // but for simplicity, we can do it on scroll end or when hero is in view
-            // body.addEventListener('scroll', function() {
-            //      const heroScreenBottom = heroScreen.getBoundingClientRect().bottom;
-            //      if (heroScreenBottom > window.innerHeight - 50) { // Give a small buffer
-            //          body.style.overflowY = 'hidden';
-            //      }
-            // });
         });
     </script>
 
