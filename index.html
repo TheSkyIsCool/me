@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sky's shitty website</title>
+    <title>sky's goofy website</title>
 
     <script>
         history.scrollRestoration = "manual";
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Scroll to top on page load
+            window.scrollTo(0, 0);
+
+            const aboutMeButton = document.getElementById('aboutMeButton');
+            const aboutMeSection = document.getElementById('about-me-section');
+            const body = document.body;
+
+            // Initially disable scrolling
+            body.style.overflowY = 'hidden';
+
+            aboutMeButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default anchor link behavior
+                // Enable scrolling
+                body.style.overflowY = 'auto';
+                // Scroll to the about-me section smoothly
+                aboutMeSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
     </script>
 
     <link rel="stylesheet" href="style.css">
@@ -15,7 +35,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg">
-
 </head>
 <body>
 
@@ -45,39 +64,21 @@
         </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // *** IMPORTANT ADDITION:
-            // This ensures the page is scrolled to the very top when the DOM content is loaded.
-            window.scrollTo(0, 0);
+    <section id="music-section" class="content-section">
+        <h2>🎵 Loud NCS Music 🎵</h2>
+        <p>Enjoy the most nostalgic, loud, and goofy music tracks from NCS!</p>
 
-            const aboutMeButton = document.getElementById('aboutMeButton');
-            const aboutMeSection = document.getElementById('about-me-section');
-            const heroScreen = document.getElementById('heroScreen');
-            const body = document.body;
-
-            // Initially disable scrolling
-            body.style.overflowY = 'hidden';
-
-            aboutMeButton.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default anchor link behavior
-                // Enable scrolling
-                body.style.overflowY = 'auto';
-                // Scroll to the about me section smoothly
-                aboutMeSection.scrollIntoView({ behavior: 'smooth' });
-            });
-
-            // Optional: Re-disable scrolling if user scrolls back to hero-screen
-            // This is a bit tricky to implement perfectly for all scroll events,
-            // but for simplicity, we can do it on scroll end or when hero is in view
-            // body.addEventListener('scroll', function() {
-            //      const heroScreenBottom = heroScreen.getBoundingClientRect().bottom;
-            //      if (heroScreenBottom > window.innerHeight - 50) { // Give a small buffer
-            //          body.style.overflowY = 'hidden';
-            //      }
-            // });
-        });
-    </script>
+        <!-- Embedded Music Player -->
+        <div class="music-player">
+            <iframe 
+                src="https://www.youtube.com/embed/videoseries?list=PLRBp0Fe2Js" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen 
+                class="music-iframe">
+            </iframe>
+        </div>
+    </section>
 
 </body>
 </html>
