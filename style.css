@@ -203,83 +203,91 @@ body {
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Subtle white glow on hover */
 }
 
+---
+### **NEW: Pixel Transition Styles**
 
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) { /* Tablet and smaller phones */
-    .name {
-        font-size: clamp(2.5em, 10vw, 4em); /* Adjust clamp range for mobile */
-        white-space: normal; /* Allow name to wrap on mobile */
-    }
+The following CSS creates the pixel effect. It uses CSS variables for easy adjustment of the grid size and transition.
 
-    /* Social links on mobile: centered horizontal at the bottom */
-    .social-links-container {
-        left: 50%; /* Center horizontally */
-        transform: translateX(-50%); /* Adjust for true centering */
-        bottom: 20px; /* Closer to the bottom on mobile */
-        flex-direction: row; /* Horizontal on mobile */
-        width: auto; /* Let content determine width */
-        gap: 15px;
-        padding: 5px; /* Adjust padding for fixed positioning on mobile */
-    }
-    .social-link:hover {
-        transform: translateY(-5px); /* Keep a vertical hover for consistency on horizontal layout */
-    }
-    .social-icon {
-        width: 25px !important;
-        height: 25px !important;
-    }
+```css
+.pixel-transition-container {
+    --pixel-size: 20px; /* Size of each pixel block */
+    --grid-columns: 20; /* Number of columns in the pixel grid */
+    --transition-duration: 0.5s; /* How long the pixel transition takes */
+    --transition-delay-multiplier: 0.05s; /* Delay between each pixel's transition */
 
-    /* About Me button on mobile: bottom right */
-    .about-me-button {
-        right: 3vw; /* Adjust for mobile */
-        bottom: 30px; /* Adjust for mobile */
-        font-size: 1em;
-        padding: 8px 12px;
-    }
-    .about-me-button:hover {
-        transform: translateX(-5px); /* Still move left on hover */
-    }
-
-    .content-section h2 {
-        font-size: 2em;
-    }
-    .content-section p {
-        font-size: 1em;
-    }
-    .spts-calc-link {
-        bottom: 15px;
-        left: 15px;
-        font-size: 0.8em;
-    }
+    position: relative;
+    width: 100%; /* Adjust as needed, e.g., max-width: 500px; */
+    max-width: 500px; /* Max width for the image container */
+    aspect-ratio: 16 / 9; /* Maintain aspect ratio (e.g., 16:9) */
+    overflow: hidden; /* Hide overflowing pixels */
+    margin-bottom: 30px; /* Space between the image and the text */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Shadow around the image */
+    border-radius: 8px; /* Slightly rounded corners for the container */
+    background-color: #333; /* Fallback background color */
 }
 
-@media (max-width: 480px) { /* Smaller phones */
-    .name {
-        font-size: clamp(2em, 12vw, 3.5em); /* Even smaller min font for very narrow phones */
-    }
-    .social-links-container {
-        bottom: 15px; /* Even closer to bottom on small phones */
-        gap: 10px;
-    }
-    .social-icon {
-        width: 20px !important;
-        height: 20px !important;
-    }
-    .about-me-button {
-        right: 2vw;
-        bottom: 20px; /* Adjust for very small phones */
-        font-size: 0.9em;
-        padding: 6px 10px;
-    }
-    .content-section h2 {
-        font-size: 1.5em;
-    }
-    .content-section p {
-        font-size: 0.9em;
-    }
-    .spts-calc-link {
-        bottom: 10px;
-        left: 10px;
-        font-size: 0.75em;
-    }
+.pixel-transition-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image covers the container */
+    display: block;
+    z-index: 1; /* Ensure image is below the pixels initially */
+}
+
+.pixel-transition-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Pixels are on top */
+    display: grid;
+    /* Calculate grid template based on pixel size and number of columns */
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    /* Set background to the same image as the actual image, but pixelated */
+    background-image: url('images/thesky2.jpg');
+    background-size: cover; /* Cover the grid area */
+    background-position: center center;
+    pointer-events: none; /* Allows hover through the pseudo-element to the actual pixels */
+    opacity: 1; /* Initially visible */
+    transition: opacity var(--transition-duration) ease-out; /* Fade out the pixelated layer */
+}
+
+/* This is the magic for the individual pixel blocks */
+.pixel-transition-container:hover::before {
+    opacity: 0; /* Hide the pixelated overlay on hover */
+}
+
+/* Create the individual pixel blocks by repeating background within the grid cells */
+.pixel-transition-container::before {
+    /* This creates the pixel effect */
+    background-image: url('images/thesky2.jpg'); /* Same image */
+    background-size: var(--pixel-size) var(--pixel-size); /* Each pixel is the background unit */
+    background-repeat: repeat; /* Repeat to fill the grid */
+    image-rendering: pixelated; /* Crucial for crisp pixelation */
+    image-rendering: -moz-crisp-edges; /* Firefox */
+    image-rendering: -webkit-crisp-edges; /* Chrome/Safari */
+}
+
+/* Add an overlay for each "pixel" that fades out */
+.pixel-transition-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3; /* On top of the pixelated image */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity var(--transition-duration) ease-out;
+}
+
+.pixel-transition-container:hover::after {
+    opacity: 0; /* Remove the overlay on hover */
 }
