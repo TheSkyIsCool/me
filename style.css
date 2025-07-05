@@ -18,13 +18,13 @@ body {
     position: relative; /* For positioned elements */
 }
 
-/* --- Goofy Animations --- */
+/* --- Improved Animations --- */
 @keyframes subtleBounce {
     0%, 100% {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-10px); /* Reduce bounce intensity */
     }
 }
 
@@ -33,7 +33,7 @@ body {
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(-5deg);
+        transform: rotate(-5deg); /* Reduce wiggle intensity */
     }
     75% {
         transform: rotate(5deg);
@@ -45,7 +45,7 @@ body {
         transform: rotate(0deg);
     }
     100% {
-        transform: rotate(360deg);
+        transform: rotate(360deg); /* Ensure smooth spin */
     }
 }
 
@@ -54,7 +54,7 @@ body {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.1);
+        transform: scale(1.05); /* Gentle zoom effect */
     }
 }
 
@@ -63,10 +63,10 @@ body {
         transform: translateX(0);
     }
     25% {
-        transform: translateX(-5px);
+        transform: translateX(-3px); /* Slight shake */
     }
     75% {
-        transform: translateX(5px);
+        transform: translateX(3px);
     }
 }
 
@@ -75,13 +75,13 @@ body {
     height: 100vh;
     width: 100vw;
     position: relative;
-    animation: subtleZoom 5s infinite alternate ease-in-out; /* Less aggressive zoom animation */
+    animation: subtleZoom 5s infinite alternate ease-in-out; /* Gentle zoom animation */
 }
 
 /* Profile text (Name only) */
 .name {
     font-family: 'Roboto', sans-serif;
-    font-size: 8vw;
+    font-size: 6vw; /* Reduced size for better fit */
     font-weight: 700;
     margin: 0;
     letter-spacing: 0.1em;
@@ -95,10 +95,10 @@ body {
 .social-links-container {
     position: fixed;
     left: 2vw;
-    bottom: 50px;
+    bottom: 10vh; /* Adjusted position to avoid overlapping */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px; /* Reduced gap for compact layout */
     z-index: 100;
 }
 
@@ -111,8 +111,8 @@ body {
 }
 
 .social-icon {
-    width: 30px !important;
-    height: 30px !important;
+    width: 25px !important; /* Reduced size for better fit */
+    height: 25px !important;
     filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
@@ -120,10 +120,10 @@ body {
 .about-me-button {
     position: fixed;
     right: 2vw;
-    bottom: 50px;
+    bottom: 10vh; /* Adjusted position to avoid going out of frame */
     text-decoration: none;
     color: white;
-    font-size: 1.1em;
+    font-size: 1em; /* Reduced size for better fit */
     font-weight: 700;
     letter-spacing: 0.05em;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
@@ -138,7 +138,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+    padding: 40px 10px; /* Adjusted padding for better fit */
     background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0.4) 0%,
@@ -150,15 +150,15 @@ body {
 }
 
 .content-section h2 {
-    font-size: 2.5em;
-    padding-bottom: 15px;
+    font-size: 2em; /* Adjusted size */
+    padding-bottom: 10px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     animation: gentleShake 1s infinite ease-in-out; /* Gentle shaking animation */
 }
 
 .content-section p {
-    font-size: 1.2em;
-    line-height: 1.6;
+    font-size: 1em; /* Adjusted size */
+    line-height: 1.4; /* Better readability */
     animation: subtleBounce 3s infinite alternate; /* Subtle bouncing animation */
 }
 
@@ -171,6 +171,16 @@ body {
 /* Media Queries */
 @media (max-width: 768px) {
     .name {
-        animation: gentleShake 1s infinite ease-in-out; /* Adjust for smaller screens */
+        font-size: 5vw; /* Adjusted for smaller screens */
+        animation: gentleShake 1s infinite ease-in-out; /* Adjust animation */
+    }
+
+    .social-links-container {
+        bottom: 5vh; /* Adjusted position */
+    }
+
+    .about-me-button {
+        font-size: 0.9em; /* Reduced font size */
+        bottom: 5vh; /* Adjusted position */
     }
 }
