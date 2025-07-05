@@ -18,162 +18,127 @@ body {
     position: relative; /* For positioned elements */
 }
 
-/* --- Subtle Animations --- */
-@keyframes subtleBounce {
+/* Explosion Animation */
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(3);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Appear Animation */
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Goofy Hover Animation */
+@keyframes goofyHover {
+    0% {
+        transform: rotate(-10deg) scale(1.05);
+    }
+    100% {
+        transform: rotate(10deg) scale(1.1);
+    }
+}
+
+/* About Me Section Goofy Effects */
+@keyframes randomBounce {
     0%, 100% {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-5px); /* Very minimal bounce */
+        transform: translateY(-20px);
     }
 }
 
-@keyframes subtleWiggle {
+@keyframes colorChange {
     0%, 100% {
-        transform: rotate(0deg);
+        color: white;
     }
-    25% {
-        transform: rotate(-3deg); /* Minimal wiggle */
-    }
-    75% {
-        transform: rotate(3deg);
+    50% {
+        color: yellow;
     }
 }
 
-@keyframes subtleSpin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg); /* Gentle spin */
-    }
-}
-
-@keyframes gentleShake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-2px); /* Slight shake */
-    }
-    75% {
-        transform: translateX(2px);
-    }
-}
-
-/* Hero Section */
-.hero-screen {
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-}
-
-/* Profile text (Name only) */
+/* Styles for "sky." */
 .name {
     font-family: 'Roboto', sans-serif;
-    font-size: 6vw; /* Reduced size for better fit */
+    font-size: 6vw;
     font-weight: 700;
     margin: 0;
     letter-spacing: 0.1em;
     text-transform: lowercase;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
-    animation: subtleBounce 3s infinite ease-in-out; /* Subtle bouncing animation */
     position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
 }
 
-/* Social links */
+/* Social Links */
 .social-links-container {
     position: fixed;
-    left: 5vw; /* Adjusted position to avoid overlapping */
-    bottom: 10vh; /* Adjusted position */
+    left: 5vw;
+    bottom: 10vh;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Compact layout */
+    gap: 15px;
     z-index: 100;
-}
-
-.social-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    animation: subtleWiggle 4s infinite ease-in-out; /* Subtle wiggling animation */
-}
-
-.social-icon {
-    width: 30px !important; /* Proper size */
-    height: 30px !important;
-    filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
+    opacity: 0; /* Initially hidden for the appear effect */
 }
 
 /* About Me Button */
 .about-me-button {
     position: fixed;
-    right: 5vw; /* Adjusted position */
-    bottom: 10vh; /* Adjusted position */
+    right: 5vw;
+    bottom: 10vh;
     text-decoration: none;
     color: white;
-    font-size: 1em; /* Proper size */
+    font-size: 1em;
     font-weight: 700;
     letter-spacing: 0.05em;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     z-index: 100;
-    animation: subtleSpin 6s infinite linear; /* Gentle spinning animation */
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* About Me Section */
-.content-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 10px; /* Adjusted padding for better fit */
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0.7) 50%,
-        rgba(0, 0, 0, 0.4) 100%
-    );
-    color: rgba(255, 255, 255, 0.9);
-    text-align: center;
-}
-
 .content-section h2 {
-    font-size: 2em; /* Adjusted size */
+    font-size: 2em;
     padding-bottom: 10px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    animation: gentleShake 2s infinite ease-in-out; /* Gentle shaking animation */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    animation: randomBounce 3s infinite ease-in-out, colorChange 3s infinite ease-in-out; /* Goofy effects */
 }
 
 .content-section p {
-    font-size: 1em; /* Adjusted size */
-    line-height: 1.4; /* Better readability */
-    animation: subtleBounce 3s infinite alternate; /* Subtle bouncing animation */
+    font-size: 1em;
+    line-height: 1.4;
+    animation: randomBounce 2s infinite ease-in-out; /* Goofy bounce */
 }
 
 .spts-calc-link a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    animation: subtleWiggle 3s infinite ease-in-out; /* Subtle wiggling animation */
+    animation: colorChange 3s infinite ease-in-out;
+    transition: transform 0.3s ease;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    .name {
-        font-size: 5vw; /* Adjusted for smaller screens */
-    }
-
-    .social-links-container {
-        bottom: 5vh; /* Adjusted position */
-    }
-
-    .about-me-button {
-        font-size: 0.9em; /* Reduced font size */
-        bottom: 5vh; /* Adjusted position */
-    }
+.spts-calc-link a:hover {
+    transform: scale(1.2);
 }
