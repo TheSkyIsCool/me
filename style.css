@@ -7,86 +7,85 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    color: white;
+    color: white; /* Default text color for the hero section */
     line-height: 1.6;
+    /* Sky background on the body so it appears throughout the page */
     background-image: url('images/thesky.jpg');
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed;
+    background-attachment: fixed; /* Keep background fixed during scroll */
     background-repeat: no-repeat;
-    overflow-x: hidden;
-    position: relative;
-}
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    position: relative; /* For any elements positioned relative to the body (though fixed is preferred here) */
 
-/* Goofy Animations */
-@keyframes bounceBoom {
-    0%, 100% {
-        transform: translateY(0);
+    /* Custom Scrollbar Styling (Webkit browsers: Chrome, Safari, Edge) */
+    /* Track */
+    &::-webkit-scrollbar {
+        width: 10px; /* Width of the scrollbar */
     }
-    50% {
-        transform: translateY(-50px) scale(1.1);
-    }
-}
 
-@keyframes shakeBoom {
-    0%, 100% {
-        transform: translateX(0);
+    /* Handle (the draggable part) */
+    &::-webkit-scrollbar-thumb {
+        background: rgba(138, 43, 226, 0.7); /* Purple color for the scroll handle */
+        border-radius: 5px; /* Rounded corners for the handle */
+        border: 2px solid rgba(255, 255, 255, 0.1); /* Slight border for definition */
     }
-    25% {
-        transform: translateX(-15px);
-    }
-    75% {
-        transform: translateX(15px);
-    }
-}
 
-@keyframes pulseBoom {
-    0% {
-        transform: scale(1);
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgba(138, 43, 226, 1); /* Darker purple on hover */
     }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
+
+    /* Track background */
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2); /* Transparent dark background for the scroll track */
     }
 }
 
-/* Hero Section */
+
+/* Hero Section (The initial full-screen view) */
 .hero-screen {
-    height: 100vh;
-    width: 100vw;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: bounceBoom 2s infinite ease-in-out; /* Goofy bounce animation */
+    height: 100vh; /* Takes full viewport height */
+    width: 100vw; /* Takes full viewport width */
+    position: relative; /* For absolutely positioning the .profile-content (name) */
+    box-sizing: border-box;
+    /* Removed all flexbox properties from here - relying on absolute/fixed for children */
 }
 
-/* Profile text (Name only) */
+/* Profile text (Name only) - Centered */
+.profile-content {
+    position: absolute; /* Position explicitly on the page */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for true centering (both axes) */
+    text-align: center; /* Center text within its container */
+    max-width: 80vw; /* Allow text to take more width if centered */
+    box-sizing: border-box;
+}
+
 .name {
     font-family: 'Roboto', sans-serif;
-    font-size: 6vw;
+    font-size: 8vw; /* Default for desktop, overridden by media queries for mobile */
     font-weight: 700;
     margin: 0;
     letter-spacing: 0.1em;
-    text-transform: lowercase;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    white-space: nowrap;
-    animation: shakeBoom 3s infinite ease-in-out; /* Shaking animation */
+    text-transform: lowercase; /* Makes "SKY" appear as "sky" */
+    line-height: 1.2;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    white-space: nowrap; /* Prevent line break on desktop, will adjust for mobile */
 }
 
-/* Social Links */
+/* Social links container positioning - NOW FIXED TO VIEWPPORT */
 .social-links-container {
-    position: fixed;
-    left: 5vw;
-    bottom: 10vh;
+    position: fixed; /* Crucial: Sticks to the viewport */
+    left: 2vw; /* Desktop default */
+    bottom: 50px; /* Desktop default */
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 100;
-    animation: pulseBoom 1.5s infinite ease-in-out; /* Pulsing animation */
+    flex-direction: column; /* Desktop default: vertical stack */
+    gap: 20px;
+    z-index: 100; /* Ensure it's on top of other content */
+    padding: 10px; /* Add some padding to prevent touching screen edges */
+    box-sizing: border-box;
 }
 
 .social-link {
@@ -94,6 +93,12 @@ body {
     align-items: center;
     text-decoration: none;
     color: white;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateX(5px); /* Desktop hover */
+    opacity: 0.8;
 }
 
 .social-icon {
@@ -102,82 +107,179 @@ body {
     filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
-/* About Me Button */
+/* About Me Button positioning - NOW FIXED TO VIEWPPORT */
 .about-me-button {
-    position: fixed;
-    right: 5vw;
-    bottom: 10vh;
+    position: fixed; /* Crucial: Sticks to the viewport */
+    right: 2vw; /* Desktop default */
+    bottom: 50px; /* Desktop default */
     text-decoration: none;
     color: white;
-    font-size: 1em;
+    font-size: 1.1em;
     font-weight: 700;
     letter-spacing: 0.05em;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    z-index: 100;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    animation: pulseBoom 2s infinite ease-in-out; /* Pulsing animation */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    z-index: 100; /* Ensure it's on top of other content */
+    padding: 10px 15px; /* Button styling */
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    white-space: nowrap; /* Prevent button text from wrapping */
 }
 
 .about-me-button:hover {
-    transform: scale(1.2);
+    transform: translateX(-5px); /* Desktop hover */
     opacity: 0.8;
+    background-color: rgba(0,0,0,0.4);
 }
 
-/* Music Button */
-.music-button {
-    position: fixed;
-    top: 10vh;
-    right: 5vw;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    font-size: 2em;
-    cursor: pointer;
-    animation: pulseBoom 2s infinite ease-in-out; /* Pulsing animation */
-}
-
-.music-button:hover {
-    transform: scale(1.2);
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Music Player */
-.music-player {
-    position: fixed;
-    bottom: 5vh;
-    left: 5vw;
-    width: 90vw;
-    max-width: 600px;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    color: white;
-    display: none;
-}
-
-.music-player.visible {
-    display: block;
-}
-
-.music-controls {
+/* About Me Section Styles (appears when scrolled down) */
+.content-section {
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    position: relative; /* For positioning spts-calc-link */
+    /* Background for the About Me section - a translucent gradient to blend */
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%, /* Slightly transparent black */
+        rgba(0, 0, 0, 0.7) 50%, /* More opaque black in the middle */
+        rgba(0, 0, 0, 0.4) 100% /* Slightly transparent black */
+    );
+    color: rgba(255, 255, 255, 0.9); /* White-ish text color */
+    text-align: center;
 }
 
-.music-controls button {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+/* About Me content styling (now directly inside .content-section) */
+.content-section h2,
+.content-section p {
+    /* Apply glow effect to About Me text */
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    color: inherit; /* Inherit color from .content-section (white-ish) */
+    margin: 0 0 15px 0; /* Adjust margins as needed */
+    max-width: 600px; /* Limit width of text for readability */
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.music-controls button:hover {
-    transform: scale(1.1);
+.content-section h2 {
+    font-size: 2.5em;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+    font-weight: 700;
+}
+
+.content-section p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* NEW: Styles for the Calculator Link */
+.spts-calc-link {
+    position: absolute; /* Positioned relative to .content-section */
+    bottom: 20px; /* Distance from bottom */
+    left: 20px; /* Distance from left */
+    font-size: 0.9em; /* Small, but readable text */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Matching text shadow */
+    white-space: nowrap; /* Prevent line break */
+    z-index: 10; /* Ensure it's above other elements if needed */
+}
+
+.spts-calc-link a {
+    color: rgba(255, 255, 255, 0.7); /* Slightly translucent white */
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.spts-calc-link a:hover {
+    color: rgba(255, 255, 255, 1); /* Brighter white on hover */
+    text-decoration: underline;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Subtle white glow on hover */
+}
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) { /* Tablet and smaller phones */
+    .name {
+        font-size: clamp(2.5em, 10vw, 4em); /* Adjust clamp range for mobile */
+        white-space: normal; /* Allow name to wrap on mobile */
+    }
+
+    /* Social links on mobile: centered horizontal at the bottom */
+    .social-links-container {
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for true centering */
+        bottom: 20px; /* Closer to the bottom on mobile */
+        flex-direction: row; /* Horizontal on mobile */
+        width: auto; /* Let content determine width */
+        gap: 15px;
+        padding: 5px; /* Adjust padding for fixed positioning on mobile */
+    }
+    .social-link:hover {
+        transform: translateY(-5px); /* Keep a vertical hover for consistency on horizontal layout */
+    }
+    .social-icon {
+        width: 25px !important;
+        height: 25px !important;
+    }
+
+    /* About Me button on mobile: bottom right */
+    .about-me-button {
+        right: 3vw; /* Adjust for mobile */
+        bottom: 30px; /* Adjust for mobile */
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+    .about-me-button:hover {
+        transform: translateX(-5px); /* Still move left on hover */
+    }
+
+    .content-section h2 {
+        font-size: 2em;
+    }
+    .content-section p {
+        font-size: 1em;
+    }
+    .spts-calc-link {
+        bottom: 15px;
+        left: 15px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) { /* Smaller phones */
+    .name {
+        font-size: clamp(2em, 12vw, 3.5em); /* Even smaller min font for very narrow phones */
+    }
+    .social-links-container {
+        bottom: 15px; /* Even closer to bottom on small phones */
+        gap: 10px;
+    }
+    .social-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    .about-me-button {
+        right: 2vw;
+        bottom: 20px; /* Adjust for very small phones */
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+    .content-section h2 {
+        font-size: 1.5em;
+    }
+    .content-section p {
+        font-size: 0.9em;
+    }
+    .spts-calc-link {
+        bottom: 10px;
+        left: 10px;
+        font-size: 0.75em;
+    }
 }
