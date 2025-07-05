@@ -35,17 +35,16 @@
                 const track = tracks[index];
                 audioPlayer.src = track.src;
                 trackTitle.innerText = track.title;
+                audioPlayer.contentWindow.location.reload(true); // Force reload iframe to auto-play
             }
 
             // Play/Pause functionality
             playPauseButton.addEventListener('click', () => {
-                if (audioPlayer.paused) {
-                    audioPlayer.play();
-                    playPauseButton.innerText = "⏸ Pause";
-                } else {
-                    audioPlayer.pause();
-                    playPauseButton.innerText = "▶ Play";
+                const iframe = audioPlayer.contentWindow;
+                if (iframe) {
+                    iframe.postMessage('play', '*');
                 }
+                playPauseButton.innerText = "⏸ Pause";
             });
 
             // Next track functionality
