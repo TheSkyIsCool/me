@@ -9,11 +9,59 @@
         document.addEventListener('DOMContentLoaded', () => {
             const aboutMeButton = document.getElementById('aboutMeButton');
             const aboutMeSection = document.getElementById('about-me-section');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const trackTitle = document.getElementById('trackTitle');
+            const playPauseButton = document.getElementById('playPause');
+            const nextTrackButton = document.getElementById('nextTrack');
+            const prevTrackButton = document.getElementById('prevTrack');
 
+            const tracks = [
+                { title: "Cartoon - On & On (feat. Daniel Levi)", src: "https://www.youtube.com/embed/TW9d8vYrVFQ?autoplay=1" },
+                { title: "Alan Walker - Fade", src: "https://www.youtube.com/embed/3nQNiWdeH2Q?autoplay=1" },
+                { title: "Elektronomia - Sky High", src: "https://www.youtube.com/embed/9iHM6X6uUH8?autoplay=1" },
+                { title: "DEAF KEV - Invincible", src: "https://www.youtube.com/embed/__CRWE-L45k?autoplay=1" }
+            ];
+
+            let currentTrackIndex = 0;
+
+            // Scroll to "About Me" section on button click
             aboutMeButton.addEventListener('click', function (event) {
-                event.preventDefault(); // Prevent default anchor link behavior
+                event.preventDefault();
                 aboutMeSection.scrollIntoView({ behavior: 'smooth' });
             });
+
+            // Load the initial track
+            function loadTrack(index) {
+                const track = tracks[index];
+                audioPlayer.src = track.src;
+                trackTitle.innerText = track.title;
+            }
+
+            // Play/Pause functionality
+            playPauseButton.addEventListener('click', () => {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playPauseButton.innerText = "⏸ Pause";
+                } else {
+                    audioPlayer.pause();
+                    playPauseButton.innerText = "▶ Play";
+                }
+            });
+
+            // Next track functionality
+            nextTrackButton.addEventListener('click', () => {
+                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+                loadTrack(currentTrackIndex);
+            });
+
+            // Previous track functionality
+            prevTrackButton.addEventListener('click', () => {
+                currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+                loadTrack(currentTrackIndex);
+            });
+
+            // Automatically play the first track on page load
+            loadTrack(currentTrackIndex);
         });
     </script>
 
@@ -56,36 +104,15 @@
         <h2>🎵 Loud NCS Music 🎵</h2>
         <p>Enjoy the most nostalgic, loud, and goofy music tracks from NCS!</p>
 
-        <!-- Embedded YouTube Videos -->
+        <!-- Custom Music Player -->
         <div class="music-player">
-            <iframe 
-                src="https://www.youtube.com/embed/TW9d8vYrVFQ?autoplay=1" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen 
-                class="music-iframe">
-            </iframe>
-            <iframe 
-                src="https://www.youtube.com/embed/3nQNiWdeH2Q?autoplay=0" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen 
-                class="music-iframe">
-            </iframe>
-            <iframe 
-                src="https://www.youtube.com/embed/9iHM6X6uUH8?autoplay=0" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen 
-                class="music-iframe">
-            </iframe>
-            <iframe 
-                src="https://www.youtube.com/embed/__CRWE-L45k?autoplay=0" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen 
-                class="music-iframe">
-            </iframe>
+            <h3 id="trackTitle">Track Title</h3>
+            <iframe id="audioPlayer" class="music-iframe" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+            <div class="music-controls">
+                <button id="prevTrack">⏮ Previous</button>
+                <button id="playPause">▶ Play</button>
+                <button id="nextTrack">⏭ Next</button>
+            </div>
         </div>
     </section>
 
