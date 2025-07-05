@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    color: white; /* Default text color for the hero section */
+    color: white;
     line-height: 1.6;
     background-image: url('images/thesky.jpg');
     background-size: cover;
@@ -18,64 +18,47 @@ body {
     position: relative; /* For positioned elements */
 }
 
-/* Explosion Animation */
-@keyframes explode {
+/* Fade-in Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
     0% {
         transform: scale(1);
         opacity: 1;
     }
     50% {
-        transform: scale(3);
-        opacity: 0.5;
+        transform: scale(1.05);
+        opacity: 0.8;
     }
     100% {
-        transform: scale(0);
-        opacity: 0;
-    }
-}
-
-/* Appear Animation */
-@keyframes appear {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    100% {
+        transform: scale(1);
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
-/* Goofy Hover Animation */
-@keyframes goofyHover {
-    0% {
-        transform: rotate(-10deg) scale(1.05);
-    }
-    100% {
-        transform: rotate(10deg) scale(1.1);
-    }
+/* Hero Section */
+.hero-screen {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in effect for the whole section */
 }
 
-/* About Me Section Goofy Effects */
-@keyframes randomBounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-@keyframes colorChange {
-    0%, 100% {
-        color: white;
-    }
-    50% {
-        color: yellow;
-    }
-}
-
-/* Styles for "sky." */
+/* Profile text (Name only) */
 .name {
     font-family: 'Roboto', sans-serif;
     font-size: 6vw;
@@ -85,10 +68,7 @@ body {
     text-transform: lowercase;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);
+    animation: fadeIn 1.5s ease-in-out forwards; /* Fade-in effect */
 }
 
 /* Social Links */
@@ -100,7 +80,20 @@ body {
     flex-direction: column;
     gap: 15px;
     z-index: 100;
-    opacity: 0; /* Initially hidden for the appear effect */
+    animation: fadeIn 2s ease-in-out forwards; /* Fade-in effect */
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.social-icon {
+    width: 30px !important;
+    height: 30px !important;
+    filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
 /* About Me Button */
@@ -118,24 +111,46 @@ body {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.about-me-button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
 /* About Me Section */
-.content-section h2 {
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 10px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+/* Goofy effects for About Me content */
+.about-title {
     font-size: 2em;
     padding-bottom: 10px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    animation: randomBounce 3s infinite ease-in-out, colorChange 3s infinite ease-in-out; /* Goofy effects */
+    animation: pulse 2s infinite ease-in-out; /* Gentle pulse effect */
 }
 
-.content-section p {
+.about-description {
     font-size: 1em;
     line-height: 1.4;
-    animation: randomBounce 2s infinite ease-in-out; /* Goofy bounce */
+    animation: pulse 3s infinite ease-in-out; /* Gentle pulse effect */
 }
 
 .spts-calc-link a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    animation: colorChange 3s infinite ease-in-out;
     transition: transform 0.3s ease;
 }
 

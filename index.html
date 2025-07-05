@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sky's silly website</title>
+    <title>sky's website</title>
 
     <script>
         history.scrollRestoration = "manual";
@@ -21,10 +21,10 @@
 
     <div class="hero-screen" id="heroScreen">
         <div class="profile-content">
-            <h1 class="name" id="skyText">sky.</h1>
+            <h1 class="name">sky.</h1>
         </div>
 
-        <div class="social-links-container" id="socialLinks">
+        <div class="social-links-container">
             <a href="https://discord.com/users/852844724456652829" target="_blank" rel="noopener noreferrer" class="social-link">
                 <img src="images/discord_icon.png" alt="Discord" class="social-icon">
             </a>
@@ -33,7 +33,7 @@
             </a>
         </div>
 
-        <a href="#" id="aboutMeButton" class="about-me-button">about meeee →</a>
+        <a href="#about-me-section" id="aboutMeButton" class="about-me-button">about meeee →</a>
     </div>
 
     <section id="about-me-section" class="content-section">
@@ -44,30 +44,6 @@
             <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
         </div>
     </section>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const skyText = document.getElementById("skyText");
-            const socialLinks = document.getElementById("socialLinks");
-
-            // Explosion effect for "sky."
-            skyText.style.animation = "explode 1s ease-out forwards";
-
-            // Delay the appearance of social links
-            setTimeout(() => {
-                socialLinks.style.animation = "appear 1s ease-in forwards";
-            }, 1000);
-
-            // About Me button goofy hover effect
-            const aboutMeButton = document.getElementById("aboutMeButton");
-            aboutMeButton.addEventListener("mouseenter", () => {
-                aboutMeButton.style.animation = "goofyHover 0.5s infinite alternate";
-            });
-            aboutMeButton.addEventListener("mouseleave", () => {
-                aboutMeButton.style.animation = "none";
-            });
-        });
-    </script>
 
 </body>
 </html>
