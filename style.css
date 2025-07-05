@@ -153,11 +153,11 @@ body {
     text-align: center;
 }
 
-/* Global H2 and P styles within content-section */
+/* Global H2 in content-section (for "Heyo I'm Sky!") */
 .content-section h2 {
     font-size: 2.5em;
     padding-bottom: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 25px; /* Adjust margin to allow space for the box */
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     font-weight: 700;
     text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
@@ -167,133 +167,172 @@ body {
     box-sizing: border-box;
 }
 
+/* New class for the main About Me paragraph, NOT in the pixel box */
+.about-me-paragraph {
+    font-size: 1.2em;
+    line-height: 1.6;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.6); /* Apply glow effect to About Me text */
+    margin: 15px 0; /* Add some margin around the text */
+    max-width: 600px; /* Limit width for readability */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
 /* --- NEW PIXEL REVEAL BOX STYLES --- */
 .pixel-reveal-box {
-    --pixel-size: 15px; /* Smaller pixels for more detail */
-    --grid-columns: 20; /* Number of columns for pixel grid */
-    --transition-delay-max: 0.8s; /* Max delay for pixel transition */
+    --pixel-grid-size: 20; /* Number of pixels on one side (e.g., 20x20 grid) */
+    --transition-duration: 0.6s; /* Total time for the pixel fade-out */
+    --pixel-delay-stagger: 0.02s; /* Delay between each pixel appearing (not fully utilized in pure CSS) */
 
     position: relative;
-    width: 300px; /* Fixed width for the box */
-    height: 200px; /* Fixed height for the box */
+    width: 400px; /* Fixed width of the box */
+    height: 250px; /* Fixed height of the box */
     overflow: hidden;
     margin: 30px 0; /* Space above and below the box */
     box-shadow: 0 0 25px rgba(138, 43, 226, 0.7); /* Purple glow */
     border-radius: 8px;
-    cursor: pointer; /* Indicate it's interactive */
-    display: flex; /* To center content inside */
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.9); /* Text color for revealed content */
-    font-size: 1.1em;
-    line-height: 1.5;
-    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+    cursor: pointer;
+    background-color: #000; /* Fallback background for when content shows */
 }
 
 .pixel-reveal-box:hover {
     box-shadow: 0 0 35px rgba(138, 43, 226, 1); /* Brighter glow on hover */
 }
 
-.pixel-base-image {
+/* The initial, clear image */
+.initial-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 1; /* Below the overlay */
-    opacity: 1; /* Always visible for its pixelated version */
+    z-index: 2; /* Below the pixel overlay, above the content */
+    transition: opacity var(--transition-duration) ease-out; /* Image fades out */
 }
 
+/* The pixel overlay that will appear and then dissolve */
 .pixel-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2; /* On top of the base image */
+    z-index: 3; /* On top of the initial image */
+    background-image: url('images/thesky2.jpg'); /* The image to pixelate */
+    background-size: cover; /* Cover the box area */
+    pointer-events: none; /* Allow interaction with elements below if needed */
+
+    /* Initial state: not pixelated, fully transparent (will be made opaque on hover) */
+    opacity: 0;
+    transition: opacity 0.1s ease-in; /* Quick fade in for the pixelated version */
+
+    /* Pseudo-elements for the individual pixel cells */
     display: grid;
-    grid-template-columns: repeat(var(--grid-columns), 1fr);
-    grid-template-rows: repeat(auto-fit, minmax(0, 1fr)); /* Adjust rows dynamically */
-    background-image: url('images/thesky2.jpg'); /* This image gets pixelated */
-    background-size: calc(100% / var(--grid-columns) * var(--pixel-size)) calc(100% / var(--grid-columns) * var(--pixel-size));
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
-    pointer-events: none; /* Allows hover events to pass through to the parent */
-    transform: scale(1);
-    opacity: 1;
-    transition: opacity 0.5s ease-out; /* Smooth fade for the entire overlay */
+    grid-template-columns: repeat(var(--pixel-grid-size), 1fr);
+    grid-template-rows: repeat(var(--pixel-grid-size), 1fr);
 }
 
-/* Individual pixel cells for the transition effect */
+/* This is the magic for individual pixel cells within the overlay */
 .pixel-overlay::before {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(138, 43, 226, 0.8); /* A solid color for the pixels */
-    opacity: 1;
-    transform: scale(1);
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
-    /* This creates the grid of pixel cells */
-    display: contents; /* Allows grid items to fill with children */
+    width: 100%;
+    height: 100%;
+    /* Apply pixelation to the background of THIS pseudo-element */
+    background-image: url('images/thesky2.jpg');
+    background-size: calc(var(--pixel-grid-size) * 100%) calc(var(--pixel-grid-size) * 100%); /* Make image background huge for pixel effect */
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    opacity: 0; /* Initially hidden */
+    transform: scale(0); /* Start scaled down */
+    transition: transform var(--transition-duration) ease-out, opacity var(--transition-duration) ease-out;
 }
 
+/* On hover, make the initial image disappear */
+.pixel-reveal-box:hover .initial-image {
+    opacity: 0;
+}
 
+/* On hover, make the pixel overlay appear pixelated */
 .pixel-reveal-box:hover .pixel-overlay {
-    opacity: 0; /* Fade out the entire pixel overlay */
-    /* No need for complex individual pixel transitions with this approach,
-       as the "reveal-content" will simply become visible. */
+    opacity: 1; /* Make the pixelated background visible */
 }
 
-/* Content revealed on hover */
+/* On hover, for the pixel overlay itself, transition its background to dissolve */
+.pixel-reveal-box:hover .pixel-overlay::before {
+    opacity: 0; /* The pixelated layer fades out */
+    transform: scale(1.2); /* Pixels might slightly grow or move out */
+}
+
+
+/* Content to be revealed */
 .reveal-content {
-    position: relative; /* Allows z-index */
-    z-index: 3; /* On top of everything */
-    opacity: 0; /* Hidden by default */
-    transform: scale(0.95); /* Slightly smaller initially */
-    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
-    padding: 15px; /* Padding for content */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
     box-sizing: border-box;
-    max-width: 100%; /* Ensure content doesn't overflow */
+    z-index: 1; /* Below the initial image and pixel overlay */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background for readability */
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    transform: scale(0.95); /* Slightly scaled down */
+    transition: opacity var(--transition-duration) ease-in, transform var(--transition-duration) ease-in;
 }
 
 .pixel-reveal-box:hover .reveal-content {
     opacity: 1; /* Show content on hover */
     transform: scale(1); /* Scale to normal size */
+    z-index: 4; /* Bring to front on hover */
 }
 
+/* Specific styling for the paragraph *inside* the pixel box */
 .reveal-content p {
-    margin: 0;
+    font-size: 1em; /* Adjust font size for the box */
+    line-height: 1.4;
+    margin: 0; /* Reset margins for content within the box */
     padding: 0;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-    font-size: 1em; /* Adjust font size for the box */
+    max-width: 90%; /* Keep content from hitting edges */
 }
 
-.reveal-content .spts-calc-link {
-    position: static; /* Reset positioning from global style */
-    margin-top: 15px;
-    font-size: 0.8em; /* Adjust font size for the link */
-    white-space: normal; /* Allow link to wrap if needed */
+/* Original styles for the Calculator Link, now outside the pixel box */
+.spts-calc-link {
+    /* Kept original positioning, which is relative to the content-section's flow */
+    margin-top: 20px; /* Space from the paragraph above */
+    font-size: 0.9em;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    z-index: 10; /* Ensure it's above other elements if needed */
 }
 
-.reveal-content .spts-calc-link a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: underline;
+.spts-calc-link a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.reveal-content .spts-calc-link a:hover {
+.spts-calc-link a:hover {
     color: rgba(255, 255, 255, 1);
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
 }
 
 
-/* --- Media Queries for Responsiveness (adjust for the new box) --- */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .name {
         font-size: clamp(2.5em, 10vw, 4em);
@@ -326,19 +365,23 @@ body {
     }
     .content-section h2 {
         font-size: 2em;
+        margin-bottom: 15px; /* Adjust margin for the box */
+    }
+    .about-me-paragraph { /* Specific for the main text */
+        font-size: 1em;
     }
 
-    /* Adjust pixel reveal box for smaller screens */
+    /* Adjust pixel image box for smaller screens */
     .pixel-reveal-box {
-        width: 250px;
+        width: 300px;
         height: 180px;
         margin: 20px 0;
     }
-    .reveal-content p {
+    .reveal-content p { /* Specific for text inside the pixel box */
         font-size: 0.9em;
     }
-    .reveal-content .spts-calc-link {
-        font-size: 0.7em;
+    .spts-calc-link { /* Remains separate */
+        font-size: 0.8em;
     }
 }
 
@@ -362,19 +405,23 @@ body {
     }
     .content-section h2 {
         font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    .about-me-paragraph { /* Specific for the main text */
+        font-size: 0.9em;
     }
 
-    /* Adjust pixel reveal box for very small screens */
+    /* Adjust pixel image box for very small screens */
     .pixel-reveal-box {
-        width: 220px;
-        height: 160px;
+        width: 250px;
+        height: 150px;
         margin: 15px 0;
     }
-    .reveal-content p {
+    .reveal-content p { /* Specific for text inside the pixel box */
         font-size: 0.8em;
     }
-    .reveal-content .spts-calc-link {
-        font-size: 0.65em;
-        margin-top: 10px;
+    .spts-calc-link { /* Remains separate */
+        font-size: 0.75em;
+        margin-top: 15px;
     }
 }
