@@ -18,13 +18,13 @@ body {
     position: relative; /* For positioned elements */
 }
 
-/* --- Improved Animations --- */
+/* --- Subtle Animations --- */
 @keyframes subtleBounce {
     0%, 100% {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px); /* Reduce bounce intensity */
+        transform: translateY(-5px); /* Very minimal bounce */
     }
 }
 
@@ -33,10 +33,10 @@ body {
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(-5deg); /* Reduce wiggle intensity */
+        transform: rotate(-3deg); /* Minimal wiggle */
     }
     75% {
-        transform: rotate(5deg);
+        transform: rotate(3deg);
     }
 }
 
@@ -45,16 +45,7 @@ body {
         transform: rotate(0deg);
     }
     100% {
-        transform: rotate(360deg); /* Ensure smooth spin */
-    }
-}
-
-@keyframes subtleZoom {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05); /* Gentle zoom effect */
+        transform: rotate(360deg); /* Gentle spin */
     }
 }
 
@@ -63,10 +54,10 @@ body {
         transform: translateX(0);
     }
     25% {
-        transform: translateX(-3px); /* Slight shake */
+        transform: translateX(-2px); /* Slight shake */
     }
     75% {
-        transform: translateX(3px);
+        transform: translateX(2px);
     }
 }
 
@@ -75,7 +66,6 @@ body {
     height: 100vh;
     width: 100vw;
     position: relative;
-    animation: subtleZoom 5s infinite alternate ease-in-out; /* Gentle zoom animation */
 }
 
 /* Profile text (Name only) */
@@ -88,17 +78,21 @@ body {
     text-transform: lowercase;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     white-space: nowrap;
-    animation: subtleBounce 2s infinite ease-in-out; /* Subtle bouncing animation */
+    animation: subtleBounce 3s infinite ease-in-out; /* Subtle bouncing animation */
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
 }
 
 /* Social links */
 .social-links-container {
     position: fixed;
-    left: 2vw;
-    bottom: 10vh; /* Adjusted position to avoid overlapping */
+    left: 5vw; /* Adjusted position to avoid overlapping */
+    bottom: 10vh; /* Adjusted position */
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Reduced gap for compact layout */
+    gap: 15px; /* Compact layout */
     z-index: 100;
 }
 
@@ -107,28 +101,28 @@ body {
     align-items: center;
     text-decoration: none;
     color: white;
-    animation: subtleWiggle 3s infinite ease-in-out; /* Subtle wiggling animation */
+    animation: subtleWiggle 4s infinite ease-in-out; /* Subtle wiggling animation */
 }
 
 .social-icon {
-    width: 25px !important; /* Reduced size for better fit */
-    height: 25px !important;
+    width: 30px !important; /* Proper size */
+    height: 30px !important;
     filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
 /* About Me Button */
 .about-me-button {
     position: fixed;
-    right: 2vw;
-    bottom: 10vh; /* Adjusted position to avoid going out of frame */
+    right: 5vw; /* Adjusted position */
+    bottom: 10vh; /* Adjusted position */
     text-decoration: none;
     color: white;
-    font-size: 1em; /* Reduced size for better fit */
+    font-size: 1em; /* Proper size */
     font-weight: 700;
     letter-spacing: 0.05em;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     z-index: 100;
-    animation: subtleSpin 4s infinite linear; /* Subtle spinning animation */
+    animation: subtleSpin 6s infinite linear; /* Gentle spinning animation */
 }
 
 /* About Me Section */
@@ -153,7 +147,7 @@ body {
     font-size: 2em; /* Adjusted size */
     padding-bottom: 10px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-    animation: gentleShake 1s infinite ease-in-out; /* Gentle shaking animation */
+    animation: gentleShake 2s infinite ease-in-out; /* Gentle shaking animation */
 }
 
 .content-section p {
@@ -165,14 +159,13 @@ body {
 .spts-calc-link a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    animation: subtleWiggle 2s infinite ease-in-out; /* Subtle wiggling animation */
+    animation: subtleWiggle 3s infinite ease-in-out; /* Subtle wiggling animation */
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
     .name {
         font-size: 5vw; /* Adjusted for smaller screens */
-        animation: gentleShake 1s infinite ease-in-out; /* Adjust animation */
     }
 
     .social-links-container {
