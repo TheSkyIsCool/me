@@ -6,26 +6,57 @@
     <title>sky's goofy website</title>
 
     <script>
-        history.scrollRestoration = "manual";
+        document.addEventListener('DOMContentLoaded', () => {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const trackTitle = document.getElementById('trackTitle');
+            const playPauseButton = document.getElementById('playPause');
+            const nextTrackButton = document.getElementById('nextTrack');
+            const prevTrackButton = document.getElementById('prevTrack');
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Scroll to top on page load
-            window.scrollTo(0, 0);
+            const tracks = [
+                { title: "Cartoon - On & On (feat. Daniel Levi)", src: "https://www.youtube.com/watch?v=TW9d8vYrVFQ" },
+                { title: "Alan Walker - Fade", src: "https://www.youtube.com/watch?v=3nQNiWdeH2Q" },
+                { title: "Elektronomia - Sky High", src: "https://www.youtube.com/watch?v=9iHM6X6uUH8" },
+                { title: "DEAF KEV - Invincible", src: "https://www.youtube.com/watch?v=__CRWE-L45k" }
+            ];
 
-            const aboutMeButton = document.getElementById('aboutMeButton');
-            const aboutMeSection = document.getElementById('about-me-section');
-            const body = document.body;
+            let currentTrackIndex = 0;
 
-            // Initially disable scrolling
-            body.style.overflowY = 'hidden';
+            // Load the initial track
+            function loadTrack(index) {
+                const track = tracks[index];
+                audioPlayer.src = track.src;
+                trackTitle.innerText = track.title;
+                audioPlayer.play();
+            }
 
-            aboutMeButton.addEventListener('click', function (event) {
-                event.preventDefault(); // Prevent default anchor link behavior
-                // Enable scrolling
-                body.style.overflowY = 'auto';
-                // Scroll to the about-me section smoothly
-                aboutMeSection.scrollIntoView({ behavior: 'smooth' });
+            // Play/Pause functionality
+            playPauseButton.addEventListener('click', () => {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    playPauseButton.innerText = "⏸ Pause";
+                } else {
+                    audioPlayer.pause();
+                    playPauseButton.innerText = "▶ Play";
+                }
             });
+
+            // Next track functionality
+            nextTrackButton.addEventListener('click', () => {
+                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+                loadTrack(currentTrackIndex);
+                playPauseButton.innerText = "⏸ Pause";
+            });
+
+            // Previous track functionality
+            prevTrackButton.addEventListener('click', () => {
+                currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+                loadTrack(currentTrackIndex);
+                playPauseButton.innerText = "⏸ Pause";
+            });
+
+            // Load the first track by default
+            loadTrack(currentTrackIndex);
         });
     </script>
 
@@ -68,15 +99,15 @@
         <h2>🎵 Loud NCS Music 🎵</h2>
         <p>Enjoy the most nostalgic, loud, and goofy music tracks from NCS!</p>
 
-        <!-- Embedded Music Player -->
+        <!-- Custom Music Player -->
         <div class="music-player">
-            <iframe 
-                src="https://www.youtube.com/embed/videoseries?list=PLRBp0Fe2Js" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen 
-                class="music-iframe">
-            </iframe>
+            <h3 id="trackTitle">Track Title</h3>
+            <audio id="audioPlayer" controls></audio>
+            <div class="music-controls">
+                <button id="prevTrack">⏮ Previous</button>
+                <button id="playPause">▶ Play</button>
+                <button id="nextTrack">⏭ Next</button>
+            </div>
         </div>
     </section>
 

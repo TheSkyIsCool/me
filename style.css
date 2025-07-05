@@ -1,6 +1,6 @@
-/* Basic Reset & Body Styling */
+/* Basic Styling */
 html {
-    scroll-behavior: smooth; /* Ensure smooth scrolling for button click */
+    scroll-behavior: smooth;
 }
 
 body {
@@ -15,7 +15,6 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     overflow-x: hidden;
-    position: relative;
 }
 
 /* Hero Section */
@@ -41,7 +40,6 @@ body {
     margin: 0;
     letter-spacing: 0.1em;
     text-transform: lowercase;
-    line-height: 1.2;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
 }
@@ -54,8 +52,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    z-index: 100;
-    padding: 10px;
 }
 
 .social-link {
@@ -77,32 +73,6 @@ body {
     filter: drop-shadow(0 0 10px rgba(100, 0, 150, 1));
 }
 
-/* About Me Button */
-.about-me-button {
-    position: fixed;
-    right: 2vw;
-    bottom: 50px;
-    text-decoration: none;
-    color: white;
-    font-size: 1.1em;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    z-index: 100;
-    padding: 10px 15px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
-}
-
-.about-me-button:hover {
-    transform: translateX(-5px);
-    opacity: 0.8;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
 /* About Me Section */
 .content-section {
     min-height: 100vh;
@@ -110,7 +80,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+    padding: 40px;
     background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0.4) 0%,
@@ -121,16 +91,35 @@ body {
     text-align: center;
 }
 
-/* Music Section */
+/* Music Player */
 .music-player {
     width: 80%;
-    max-width: 800px;
-    margin-top: 20px;
-}
-
-.music-iframe {
-    width: 100%;
-    height: 200px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+}
+
+.music-controls {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.music-controls button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.music-controls button:hover {
+    transform: scale(1.1);
 }
