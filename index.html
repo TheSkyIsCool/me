@@ -3,65 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sky's website</title>
+    <title>sky's shitty website</title>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const aboutMeButton = document.getElementById('aboutMeButton');
-            const aboutMeSection = document.getElementById('about-me-section');
-            const audioPlayer = document.getElementById('audioPlayer');
-            const trackTitle = document.getElementById('trackTitle');
-            const playPauseButton = document.getElementById('playPause');
-            const nextTrackButton = document.getElementById('nextTrack');
-            const prevTrackButton = document.getElementById('prevTrack');
-
-            const tracks = [
-                { title: "Cartoon - On & On (feat. Daniel Levi)", src: "https://www.youtube.com/embed/TW9d8vYrVFQ?autoplay=1" },
-                { title: "Alan Walker - Fade", src: "https://www.youtube.com/embed/3nQNiWdeH2Q?autoplay=1" },
-                { title: "Elektronomia - Sky High", src: "https://www.youtube.com/embed/9iHM6X6uUH8?autoplay=1" },
-                { title: "DEAF KEV - Invincible", src: "https://www.youtube.com/embed/__CRWE-L45k?autoplay=1" }
-            ];
-
-            let currentTrackIndex = 0;
-
-            // Scroll to "About Me" section on button click
-            aboutMeButton.addEventListener('click', function (event) {
-                event.preventDefault();
-                aboutMeSection.scrollIntoView({ behavior: 'smooth' });
-            });
-
-            // Load the initial track
-            function loadTrack(index) {
-                const track = tracks[index];
-                audioPlayer.src = track.src;
-                trackTitle.innerText = track.title;
-                audioPlayer.contentWindow.location.reload(true); // Force reload iframe to auto-play
-            }
-
-            // Play/Pause functionality
-            playPauseButton.addEventListener('click', () => {
-                const iframe = audioPlayer.contentWindow;
-                if (iframe) {
-                    iframe.postMessage('play', '*');
-                }
-                playPauseButton.innerText = "⏸ Pause";
-            });
-
-            // Next track functionality
-            nextTrackButton.addEventListener('click', () => {
-                currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-                loadTrack(currentTrackIndex);
-            });
-
-            // Previous track functionality
-            prevTrackButton.addEventListener('click', () => {
-                currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-                loadTrack(currentTrackIndex);
-            });
-
-            // Automatically play the first track on page load
-            loadTrack(currentTrackIndex);
-        });
+        history.scrollRestoration = "manual";
     </script>
 
     <link rel="stylesheet" href="style.css">
@@ -70,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="icon" type="image/jpeg" href="images/cat_icon.jpg">
+
 </head>
 <body>
 
@@ -87,33 +33,51 @@
             </a>
         </div>
 
-        <a href="#about-me-section" id="aboutMeButton" class="about-me-button">about meeee →</a>
+        <a href="#" id="aboutMeButton" class="about-me-button">about meeee →</a>
     </div>
 
     <section id="about-me-section" class="content-section">
-        <h2 class="about-title">About Me</h2>
-        <p class="about-description">Heyo I'm Sky! I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
+        <h2>Heyo I'm Sky!</h2>
+        <p>I'm 15, I play games and my favorites are SPTS games! I love 24/7ing idk !!</p>
 
         <div class="spts-calc-link">
-            <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">Calculator for SPTS OG!! (made by me)</a>
+            <a href="https://calc.skyabc.me" target="_blank" rel="noopener noreferrer">calculator for spts og!! (made by me)</a>
         </div>
     </section>
 
-    <section id="music-section" class="content-section">
-        <h2>🎵 Loud NCS Music 🎵</h2>
-        <p>Enjoy the most nostalgic, loud, and goofy music tracks from NCS!</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // *** IMPORTANT ADDITION:
+            // This ensures the page is scrolled to the very top when the DOM content is loaded.
+            window.scrollTo(0, 0);
 
-        <!-- Custom Music Player -->
-        <div class="music-player">
-            <h3 id="trackTitle">Track Title</h3>
-            <iframe id="audioPlayer" class="music-iframe" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-            <div class="music-controls">
-                <button id="prevTrack">⏮ Previous</button>
-                <button id="playPause">▶ Play</button>
-                <button id="nextTrack">⏭ Next</button>
-            </div>
-        </div>
-    </section>
+            const aboutMeButton = document.getElementById('aboutMeButton');
+            const aboutMeSection = document.getElementById('about-me-section');
+            const heroScreen = document.getElementById('heroScreen');
+            const body = document.body;
+
+            // Initially disable scrolling
+            body.style.overflowY = 'hidden';
+
+            aboutMeButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default anchor link behavior
+                // Enable scrolling
+                body.style.overflowY = 'auto';
+                // Scroll to the about me section smoothly
+                aboutMeSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Optional: Re-disable scrolling if user scrolls back to hero-screen
+            // This is a bit tricky to implement perfectly for all scroll events,
+            // but for simplicity, we can do it on scroll end or when hero is in view
+            // body.addEventListener('scroll', function() {
+            //      const heroScreenBottom = heroScreen.getBoundingClientRect().bottom;
+            //      if (heroScreenBottom > window.innerHeight - 50) { // Give a small buffer
+            //          body.style.overflowY = 'hidden';
+            //      }
+            // });
+        });
+    </script>
 
 </body>
 </html>
